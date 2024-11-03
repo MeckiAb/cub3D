@@ -6,15 +6,15 @@
 #    By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 23:58:48 by labderra          #+#    #+#              #
-#    Updated: 2024/11/03 12:42:01 by labderra         ###   ########.fr        #
+#    Updated: 2024/11/03 12:43:12 by labderra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3D
-MLX42 = ./MLX42/build/libmlx42.a 
+NAME = prueba
+MLX42 = ../MLX42/build/libmlx42.a 
 MLX_FLAGS = -Iinclude -ldl -lglfw -pthread -lm
 
-SRC = main.c \
+SRC = prueba.c \
 
 CC = clang -Wall -Wextra -Werror -g -fsanitize=address
 
@@ -26,8 +26,8 @@ $(NAME) : $(OBJ) $(MLX42)
 	$(CC) $(OBJ) $(MLX42) $(MLX_FLAGS) -o $@
 
 $(MLX42) :
-	cmake -B MLX42/build -S ./MLX42
-	cmake --build MLX42/build -j4
+	cmake -B ../MLX42/build -S ./MLX42
+	cmake --build ../MLX42/build -j4
 
 %.o : %.c
 	$(CC) -c $< -o $@
