@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 22:59:10 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/03 22:31:30 by labderra         ###   ########.fr       */
+/*   Updated: 2024/11/05 12:44:19 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,10 @@
 # include <math.h>
 # include "MLX42/include/MLX42/MLX42.h"
 
-# define IMG_WIDTH		640
-# define IMG_HEIGHT		480
-# define PIXELS_X_UNIT	128
-# define WALL			0
-# define NOT_WALL		1
-# define N_ENTRY		10
-# define E_ENTRY		11
-# define S_ENTRY		12
-# define W_ENTRY		13
-
+# define IMG_WIDTH		1024
+# define IMG_HEIGHT		768
+# define PIXELS_X_UNIT	212
+# define PI 			3.1415926
 
 typedef struct s_game
 {
@@ -55,5 +49,7 @@ typedef struct s_game
 	int			map_h;
 	char		**map;
 }	t_game;
+
+t_game	*init_game(char *map_file);
 
 #endif

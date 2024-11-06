@@ -21,21 +21,21 @@ int	main(int argc, char **argv)
 		return (1);
 	if ((mlx = mlx_init(320, 320, "Poronga", 0)) == NULL)
 		return (perror("poronga"), 1);
-/* 	if ((img = mlx_new_image(mlx, 320, 320)) == NULL)
-		return (perror("poronga_img"), 1); */
-	if ((tex = mlx_load_png(argv[1])) == NULL)
+	if ((img = mlx_new_image(mlx, 320, 320)) == NULL)
+		return (perror("poronga_img"), 1);
+/* 	if ((tex = mlx_load_png(argv[1])) == NULL)
 		return (perror("poronga_textura"), 1);
 	img = mlx_texture_to_image(mlx, tex);
-	mlx_delete_texture(tex);
+	mlx_delete_texture(tex); */
 	mlx_image_to_window(mlx, img, 0, 0);
 
-
-
-	if ((recorte = mlx_new_image(mlx, 212, 20)) == NULL)
-		return (perror("poronga_img"), 1);
+/* 	if ((recorte = mlx_new_image(mlx, 212, 20)) == NULL)
+		return (perror("poronga_img"), 1); 
 
 	memcpy(recorte->pixels, img->pixels, sizeof(uint32_t) * recorte->width * recorte->height);
-	mlx_image_to_window(mlx, recorte, 0, 250);
+	mlx_image_to_window(mlx, recorte, 50, 50);
+*/
+
 
 	mlx_loop_hook(mlx, &handle, mlx);
 	mlx_loop(mlx);
