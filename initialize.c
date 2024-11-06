@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:48 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/05 18:09:14 by labderra         ###   ########.fr       */
+/*   Updated: 2024/11/06 10:50:53 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static int	load_map(t_game *game, char *map_file)
 	game->map = ft_split(map_mock, '.');
 	game->map_w = 7;
 	game->map_h = 7;
-	game->x_pos = 3;
-	game->y_pos = 5;
-	game->x_dir = 0;
-	game->y_dir = 1;
+	game->pos_x = 3;
+	game->pos_y = 5;
+	game->dir_x = 0;
+	game->dir_y = 1;
 	return (-1 * (game->map == NULL));
 }
 

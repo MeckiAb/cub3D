@@ -6,7 +6,7 @@
 /*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 22:59:10 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/05 12:44:19 by labderra         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:51:12 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # define IMG_WIDTH		1024
 # define IMG_HEIGHT		768
 # define PIXELS_X_UNIT	212
-# define PI 			3.1415926
+# define PI 			3.141592654
+# define FOV			1.047197551
+# define STEP			0.003382912
 
 typedef struct s_game
 {
@@ -33,12 +35,13 @@ typedef struct s_game
 	int			img_w;
 	int			img_h;
 	int			ppu;
-	double		x_pos;
-	double 		y_pos;
-	double		x_dir;
-	double		y_dir;
+	double		pos_x;
+	double 		pos_y;
 	double		alpha;
-	double		fov;
+	double		dir_x;
+	double		dir_y;
+	double		tg_x;
+	double		tg_y;
 	mlx_image_t	*n_texture;
 	mlx_image_t	*e_texture;
 	mlx_image_t	*s_texture;
