@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:48 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/06 10:50:53 by labderra         ###   ########.fr       */
+/*   Updated: 2024/11/08 00:20:17 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ char	**ft_split(char const *s, char c);
 
 static int	load_map(t_game *game, char *map_file)
 {
-	char	*map_mock ="1111111.1001001.1000001.1000001.1000001.100N00.1111111";
+	char	*map_mock ="1111111.1001001.1000001.1000001.1000001.100N001.1111111";
 	
 	(void)map_file;
 	game->map = ft_split(map_mock, '.');
 	game->map_w = 7;
 	game->map_h = 7;
-	game->pos_x = 3;
-	game->pos_y = 5;
-	game->dir_x = 0;
-	game->dir_y = 1;
+	game->pos[0] = 3.5;
+	game->pos[1] = 4.5;
+	game->dir[0] = 0;
+	game->dir[1] = 1;
 	return (-1 * (game->map == NULL));
 }
 
@@ -67,6 +67,5 @@ t_game	*init_game(char *map_file)
 		return (NULL);
 	game->img_w = IMG_WIDTH;
 	game->img_h = IMG_HEIGHT;
-	game->fov = 1;
 	return (game);
 }

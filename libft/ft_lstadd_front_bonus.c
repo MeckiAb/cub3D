@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement.c                                         :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 10:56:53 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/07 00:28:15 by labderra         ###   ########.fr       */
+/*   Created: 2024/04/16 12:26:29 by labderra          #+#    #+#             */
+/*   Updated: 2024/04/16 14:21:34 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "libft.h"
 
-void	calculate_directions(t_game *game, double d_alpha)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	game->alpha += d_alpha;
-	game->dir[0] = cos(game->alpha);
-	game->dir[1] = sin(game->alpha);
+	new->next = *lst;
+	*lst = new;
 }

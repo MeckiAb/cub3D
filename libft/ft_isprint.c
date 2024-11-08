@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement.c                                         :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 10:56:53 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/07 00:28:15 by labderra         ###   ########.fr       */
+/*   Created: 2024/04/09 11:01:14 by labderra          #+#    #+#             */
+/*   Updated: 2024/04/09 12:11:39 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "libft.h"
 
-void	calculate_directions(t_game *game, double d_alpha)
+int	ft_isprint(int c)
 {
-	game->alpha += d_alpha;
-	game->dir[0] = cos(game->alpha);
-	game->dir[1] = sin(game->alpha);
+	return (c >= 32 && c <= 126);
 }

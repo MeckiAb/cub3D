@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement.c                                         :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 10:56:53 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/07 00:28:15 by labderra         ###   ########.fr       */
+/*   Created: 2024/04/16 09:08:22 by labderra          #+#    #+#             */
+/*   Updated: 2024/04/16 09:11:13 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "libft.h"
+#include <unistd.h>
 
-void	calculate_directions(t_game *game, double d_alpha)
+void	ft_putendl_fd(char *s, int fd)
 {
-	game->alpha += d_alpha;
-	game->dir[0] = cos(game->alpha);
-	game->dir[1] = sin(game->alpha);
+	write(fd, s, ft_strlen(s));
+	write(fd, "\n", 1);
 }

@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement.c                                         :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 10:56:53 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/07 00:28:15 by labderra         ###   ########.fr       */
+/*   Created: 2024/04/09 13:00:48 by labderra          #+#    #+#             */
+/*   Updated: 2024/04/09 16:26:34 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "libft.h"
 
-void	calculate_directions(t_game *game, double d_alpha)
+void	ft_bzero(void *s, size_t n)
 {
-	game->alpha += d_alpha;
-	game->dir[0] = cos(game->alpha);
-	game->dir[1] = sin(game->alpha);
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)s;
+	while (n-- > 0)
+		ptr[n] = 0;
 }

@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement.c                                         :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 10:56:53 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/07 00:28:15 by labderra         ###   ########.fr       */
+/*   Created: 2024/04/12 10:18:34 by labderra          #+#    #+#             */
+/*   Updated: 2024/04/12 10:32:04 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "libft.h"
 
-void	calculate_directions(t_game *game, double d_alpha)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	game->alpha += d_alpha;
-	game->dir[0] = cos(game->alpha);
-	game->dir[1] = sin(game->alpha);
+	while (n-- > 0)
+	{
+		if (*(unsigned char *)s == (unsigned char)c)
+			return ((void *)s);
+		s++;
+	}
+	return (NULL);
 }

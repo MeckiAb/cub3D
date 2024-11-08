@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: labderra <labderra@student.42.fr>          +#+  +:+       +#+         #
+#    By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 23:58:48 by labderra          #+#    #+#              #
-#    Updated: 2024/11/05 11:54:52 by labderra         ###   ########.fr        #
+#    Updated: 2024/11/07 23:16:26 by labderra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ MLX_FLAGS = -Iinclude -ldl -lglfw -pthread -lm
 
 SRC = main.c \
 initialize.c \
+raycasting.c \
+movement.c
 
 CC = clang -Wall -Wextra -Werror -g -fsanitize=address
 

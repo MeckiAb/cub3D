@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 22:59:10 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/06 12:51:12 by labderra         ###   ########.fr       */
+/*   Updated: 2024/11/07 23:14:55 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 
 # define IMG_WIDTH		1024
 # define IMG_HEIGHT		768
-# define PIXELS_X_UNIT	212
+# define HORIZON		576
+# define PIXELS_X_UNIT	212.0
 # define PI 			3.141592654
 # define FOV			1.047197551
 # define STEP			0.003382912
@@ -35,13 +36,9 @@ typedef struct s_game
 	int			img_w;
 	int			img_h;
 	int			ppu;
-	double		pos_x;
-	double 		pos_y;
+	double		pos[2];
 	double		alpha;
-	double		dir_x;
-	double		dir_y;
-	double		tg_x;
-	double		tg_y;
+	double		dir[2];
 	mlx_image_t	*n_texture;
 	mlx_image_t	*e_texture;
 	mlx_image_t	*s_texture;
@@ -54,5 +51,7 @@ typedef struct s_game
 }	t_game;
 
 t_game	*init_game(char *map_file);
+void	generate_frame(t_game *game);
+
 
 #endif
