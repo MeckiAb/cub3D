@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:53:21 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/07 18:55:27 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:43:48 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,6 @@ int	check_extension(char *str)
 	if (len != 1)
 		return (free(temp), 1);
 	return (free(temp), 0);
-}
-
-int	check_map_info(t_map *map)
-{
-	if (!map->n_text)
-		return (write(1, "Missing NORTH texture\n", 22), 1);
-	if (!map->s_text)
-		return (write(1, "Missing SOUTH texture\n", 22), 1);
-	if (!map->e_text)
-		return (write(1, "Missing EAST texture\n", 21), 1);
-	if (!map->w_text)
-		return (write(1, "Missing WEST texture\n", 21), 1);
-	if (!map->f_color)
-		return (write(1, "Missing Floor color\n", 21), 1);
-	if (!map->c_color)
-		return (write(1, "Missing Ceiling color\n", 23), 1);
-	return (0);
 }
 
 int	map_is_valid(char **map)
@@ -109,19 +92,5 @@ int	validate_map(t_map *map)
 		return (write(2, "Map is separated by newline: ", 29), 1);
 	if (map_is_valid(map->map))
 		return (write(2, "Map is invalid: ", 16), 1);
-	return (0);
-}
-
-int	check_map(char *file, t_map *map)
-{
-	if (read_map(map, file))
-		return (1);
-	if (get_map_info(map) || check_map_info(map))
-		return (write(2, "Invalid map information\n", 24), 1);
-	if (validate_color(map->c_color) || validate_color(map->f_color))
-		return (write(2, "Invalid color information\n", 26), 1);
-	create_map(map);
-	if (validate_map(map))
-		return (write(2, "Invalid map syntax\n", 19), 1);
 	return (0);
 }

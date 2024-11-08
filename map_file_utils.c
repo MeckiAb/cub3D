@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:52:36 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/07 18:54:35 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:41:36 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,54 +45,6 @@ char	*manage_info(char *map_line, t_map *map, int type)
 	return (clean_map_info(map_line));
 }
 
-int	insert_info_two(char *map_line, t_map *map, char *initials)
-{
-	if (!ft_strncmp(initials, "F ", 2))
-	{
-		map->f_color = manage_info(map_line, map, 5);
-		if (!map->f_color)
-			return (write(1, "Duplicated info\n", 16), 1);
-	}
-	if (!ft_strncmp(initials, "C ", 2))
-	{
-		map->c_color = manage_info(map_line, map, 6);
-		if (!map->c_color)
-			return (write(1, "Duplicated info\n", 16), 1);
-	}
-	if (!ft_strncmp(initials, "EA", 2))
-	{
-		map->e_text = manage_info(map_line, map, 4);
-		if (!map->e_text)
-			return (write(1, "Duplicated info\n", 16), 1);
-	}
-	return (0);
-}
-
-int	insert_info(char *map_line, t_map *map, char *initials)
-{
-	if (!ft_strncmp(initials, "NO", 2))
-	{
-		map->n_text = manage_info(map_line, map, 1);
-		if (!map->n_text)
-			return (write(1, "Duplicated info\n", 16), 1);
-	}
-	if (!ft_strncmp(initials, "SO", 2))
-	{
-		map->s_text = manage_info(map_line, map, 2);
-		if (!map->s_text)
-			return (write(1, "Duplicated info\n", 16), 1);
-	}
-	if (!ft_strncmp(initials, "WE", 2))
-	{
-		map->w_text = manage_info(map_line, map, 3);
-		if (!map->w_text)
-			return (write(1, "Duplicated info\n", 16), 1);
-	}
-	if (insert_info_two(map_line, map, initials))
-		return (1);
-	return (free(initials), 0);
-}
-
 int	ft_split_len(char **split)
 {
 	int	i;
@@ -101,4 +53,41 @@ int	ft_split_len(char **split)
 	while (split[i])
 		i++;
 	return (i);
+}
+
+int	read_map(t_map *map, char *file)
+{
+	int		fd;
+	char	*line;
+
+	line = NULL;
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (write(2, "Failed to open map\n", 19), 1);
+	while (1)
+	{
+		free(line);
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		map->map_str = ft_joinfree(map->map_str, line);
+	}
+	map->full_map = ft_split(map->map_str, '\n');
+	return (0);
+}
+
+void	create_map(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (map->full_map[i])
+		i++;
+	map->map = (char **)ft_calloc((i - 6 + 1), sizeof(char *));
+	i = 6;
+	while (map->full_map[i])
+	{
+		map->map[i - 6] = ft_strdup(map->full_map[i]);
+		i++;
+	}
 }

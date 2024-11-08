@@ -6,7 +6,7 @@
 #    By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/14 15:15:31 by jose-rig          #+#    #+#              #
-#    Updated: 2024/11/07 14:42:54 by jose-rig         ###   ########.fr        #
+#    Updated: 2024/11/08 14:15:36 by jose-rig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS  = -g -Wall -Wextra -Werror -ILib -fsanitize=address
 CC      = clang
 LIB = -lreadline
 
-SRCS	:= parse.c map_struct.c check_map.c map_file_utils.c\
+SRCS	:= parse.c check_map_info.c check_map.c map_file_utils.c\
 			init_free_utils.c check_map_utils.c
 
 

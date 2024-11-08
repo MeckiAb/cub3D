@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:57:42 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/07 15:59:47 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:10:34 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ void	print_map(t_map *map)
 	i = 0;
 	while (map->map[i])
 		printf("%s\n", map->map[i++]);
+}
+
+int	check_map(char *file, t_map *map)
+{
+	if (read_map(map, file))
+		return (1);
+	if (get_map_info(map) || check_map_info(map))
+		return (write(2, "Invalid map information\n", 24), 1);
+	if (validate_color(map->c_color) || validate_color(map->f_color))
+		return (write(2, "Invalid color information\n", 26), 1);
+	create_map(map);
+	if (validate_map(map))
+		return (write(2, "Invalid map syntax\n", 19), 1);
+	return (0);
 }
 
 int	main(int argc, char **argv)
