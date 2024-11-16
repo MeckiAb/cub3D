@@ -1,1 +1,8 @@
-file_letter_end.cub
+BAD:
+forbidden.cub(espacios entre paredes)
+textures_forbidden.cub
+textures_dir.cub
+textures_invalid.cub
+textures_not_xpm.cub
+GOOD:
+test_map_hole.cub
