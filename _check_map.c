@@ -6,20 +6,11 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:53:21 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/16 18:57:42 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:00:09 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-int	invalid_space(char **map, int i)
-{
-	if (!ft_strchr(map[i], '1') || !ft_strrchr(map[i], '1'))
-		return (1);
-	if (!ft_strchr(map[i - 1], '1') || !ft_strrchr(map[i - 1], '1'))
-		return (1);
-	return (0);
-}
 
 int	zero_is_incorrect(char **map, int i, int j)
 {

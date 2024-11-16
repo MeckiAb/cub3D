@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 22:59:10 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/16 18:30:32 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:00:54 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int		ft_split_len(char **split);
 int		read_map(t_map *map, char *file);
 void	create_map(t_map *map);
 //checkmap
+int		invalid_space(char **map, int i);
 int		check_extension(char *str);
 int		validate_map(t_map *map);
 int		map_borders_valid(char **map);

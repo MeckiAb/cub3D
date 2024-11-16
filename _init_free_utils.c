@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:41:54 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/16 18:32:58 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:00:14 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@ void	replace_spaces(t_map *map)
 		if (j > 0)
 			ft_memset((void *)map->map[i], '1', j);
 	}
+}
+
+int	invalid_space(char **map, int i)
+{
+	if (!ft_strchr(map[i], '1') || !ft_strrchr(map[i], '1'))
+		return (1);
+	if (!ft_strchr(map[i - 1], '1') || !ft_strrchr(map[i - 1], '1'))
+		return (1);
+	return (0);
 }
 
 void	init_map(t_map *map)
