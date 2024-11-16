@@ -1,5 +1,5 @@
 BAD:
-forbidden.cub(espacios entre paredes)
+forbidden.cub(espacios entre paredes los damos por validos)
 textures_forbidden.cub
 textures_dir.cub
 textures_invalid.cub
