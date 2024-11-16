@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 22:59:10 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/16 19:22:56 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:40:31 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct c_map
 	int			map_w;
 	double		p_x;
 	double		p_y;
+	char		facing;
 }	t_map;
 
 typedef struct s_game

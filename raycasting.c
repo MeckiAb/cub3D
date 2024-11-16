@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:15:50 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/16 17:51:20 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:28:35 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int	collision(t_game *game, double ph[2], double ray[2])
 {
-	if (ph[0] < 1.0 || ph[0] > game->map_w - 1
-		|| ph[1] < 1.0 || ph[1] > game->map_h - 1)
+	if (ph[0] < 1.0 || ph[0] > game->map_h - 1
+		|| ph[1] < 1.0 || ph[1] > game->map_w - 1)
 		return (1);
+	printf("H:%i, W:%ip0:%f - p1:%f %c / alpha:%f\n",game->map_h , game->map_w, game->pos[0], game->pos[1], game->t_map->facing, game->alpha);
 	if (ph[0] == ceil(ph[0]))
 		return (game->map[(int)ph[0] - (ray[0] < 0)][(int)ph[1]] == '1');
 	else
@@ -28,7 +29,7 @@ int	next_point(t_game *game, double photon[2], double m[2], double ray[2])
 	double	option_1[2];
 	double	option_2[2];
 	//char	map_pos;
-	
+
 	option_1[0] = ceil(photon[0]) - (ray[0] < 0)
 		+ (ray[0] > 0) * (ceil(photon[0]) == photon[0]);
 	option_1[1] = photon[1] + m[0] * (option_1[0] - photon[0]);

@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:48 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/16 18:18:01 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:17:01 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,19 @@ static int	load_map(t_game *game)
 	game->map = game->t_map->map;
 	game->map_w = game->t_map->map_w;
 	game->map_h = game->t_map->map_h;
-	game->pos[0] = game->t_map->p_x - 0.5;
-	game->pos[1] = game->t_map->p_y - 0.5;
+	game->pos[0] = game->t_map->p_x + 0.5;
+	game->pos[1] = game->t_map->p_y + 0.5;
 	/* game->pos[0] = 3.5;
 	game->pos[1] = 4.5; */
-	game->alpha = PI * 0;
+	if (game->t_map->facing == 'N')
+		game->alpha = PI * 0;
+	if (game->t_map->facing == 'E')
+		game->alpha = PI * 1.5;
+	if (game->t_map->facing == 'S')
+		game->alpha = PI * 1;
+	if (game->t_map->facing == 'W')
+		game->alpha = PI * 0.5;
+	//game->alpha = PI * 0; //(0, 90,180, 270)
 	game->dir[0] = cos(game->alpha);
 	game->dir[1] = sin(game->alpha);
 	return (-1 * (game->map == NULL));

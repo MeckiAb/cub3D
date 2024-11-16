@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:47:45 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/16 18:16:00 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:25:08 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int argc, char **argv)
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 	mlx_loop_hook(game->mlx, &handle, game);
 	mlx_loop(game->mlx);
+	print_map(&map);
 	free_all(game);
 	
 	return (0);

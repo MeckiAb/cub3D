@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:15:50 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/16 11:47:23 by labderra         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:29:33 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	collision(t_game *game, double ph[2], double ray[2])
 {
-	if (ph[0] < 1.0 || ph[0] > game->map_w - 1
-		|| ph[1] < 1.0 || ph[1] > game->map_h)
+	if (ph[0] < 1.0 || ph[0] > game->map_h - 1
+		|| ph[1] < 1.0 || ph[1] > game->map_w)
 		return (1);
 	if (ph[0] == ceil(ph[0]))
 		return (game->map[(int)ph[0] - (ray[0] < 0)][(int)ph[1]] == '1');

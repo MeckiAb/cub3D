@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:57:42 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/16 18:42:25 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:25:57 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	print_map(t_map *map)
 	printf("WIDTH:%i\n", map->map_w);
 	printf("PX:%f\n", map->p_x);
 	printf("PY:%f\n", map->p_y);
+	
 }
 
 int	check_invalids(t_map *t_map, char **map)
@@ -96,6 +97,7 @@ int	check_invalids(t_map *t_map, char **map)
 			{
 				t_map->p_x = j;
 				t_map->p_y = i;
+				t_map->facing = map[i][j];
 			}
 		}
 	}
