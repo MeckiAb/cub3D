@@ -6,11 +6,53 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:57:42 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/08 14:10:34 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 13:45:46 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+//C 218, 234, 235
+//F      17,    38,     64
+
+char	*color_extraction(char **new)
+{
+	char	*res;
+	int		i;
+
+	res = NULL;
+	i = -1;
+	while (new[++i])
+	{
+		res = ft_joinfree(res, new[i]);
+		if (new[i + 1])
+			res = ft_joinfree(res, ",");
+	}
+	return (free_split(new), res);
+}
+
+char	*extract_color_info(char *str)
+{
+	int		i;
+	int		j;
+	int		count;
+	char	**new;
+
+	i = ft_strlen(str) - 1;
+	count = 3;
+	new = (char **)ft_calloc(sizeof(char *), 3 + 1);
+	while (i >= 0 && count > 0)
+	{
+		while (i >= 0 && (str[i] == ' ' || str[i] == ','))
+			i--;
+		j = i;
+		while (i >= 0 && (str[i] != ' ' && str[i] != ','))
+			i--;
+		new[count - 1] = ft_substr(str, i + 1, j - i);
+		count --;
+	}
+	return (color_extraction(new));
+}
 
 void	print_map(t_map *map)
 {
@@ -30,6 +72,8 @@ void	print_map(t_map *map)
 	i = 0;
 	while (map->map[i])
 		printf("%s\n", map->map[i++]);
+	printf("HEIGHT:%i\n", map->map_h);
+	printf("WIDTH:%i\n", map->map_w);
 }
 
 int	check_map(char *file, t_map *map)

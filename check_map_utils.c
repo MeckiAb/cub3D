@@ -6,11 +6,22 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:39:53 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/07 18:55:10 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 15:00:07 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
+
+int	are_all_digits(const char *str)
+{
+	while(*str)
+	{
+		if (!ft_isdigit(*str))
+			return(0);
+		str++;
+	}
+	return(1);
+}
 
 int	validate_color(char *color)
 {
@@ -21,7 +32,8 @@ int	validate_color(char *color)
 	split = ft_split(color, ',');
 	while (split[i])
 	{
-		if (ft_atoi(split[i]) < 0 || ft_atoi(split[i]) > 255)
+		if (ft_atoi(split[i]) < 0 || ft_atoi(split[i]) > 255
+			|| ft_strlen(split[i]) == 0 || !are_all_digits(split[i]))
 			return (free_split(split), 1);
 		i++;
 	}
@@ -63,16 +75,11 @@ int	start_of_map(char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i + 1] && str[i] == '\n' && valid_map_char(str[i + 1]))
-		{
-			i++;
-			break ;
-		}
-		i++;
-	}
+	i = ft_strlen(str) - 1;
+	while (i >= 0 && (str[i] == '\n' || str[i] == ' ' || str[i] == '\t'))
+		i--;
+	while(i >= 0 && (valid_map_char(str[i])))
+		i--;
 	return (i);
 }
 
@@ -85,6 +92,8 @@ int	is_there_double_nl(char *str)
 	i = start_of_map(str);
 	j = ft_strlen(str) - 1;
 	z = 0;
+	while (j > 0 && (str[j] == '\n' || str[j] == ' '))
+		j--;
 	while (j > i)
 	{
 		if (str[j] && str[j - 1] && str[j] == '\n')

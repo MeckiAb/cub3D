@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:41:54 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/07 16:04:15 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/15 20:18:14 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	init_map(t_map *map)
 	map->f_color = NULL;
 	map->c_color = NULL;
 	map->map = NULL;
+	map->map_h = 0;
+	map->map_w = 0;
 }
 
 void	free_map(t_map *map)

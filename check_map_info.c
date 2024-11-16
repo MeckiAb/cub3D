@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:55:53 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/08 14:26:14 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:36:31 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 int	insert_info_two(char *map_line, t_map *map, char *initials)
 {
+	if (!ft_strncmp(initials, "EA", 2))
+	{
+		map->e_text = manage_info(map_line, map, 4);
+		if (!map->e_text)
+			return (write(1, "Duplicated info\n", 16), 1);
+	}
 	if (!ft_strncmp(initials, "F ", 2))
 	{
 		map->f_color = manage_info(map_line, map, 5);
@@ -24,12 +30,6 @@ int	insert_info_two(char *map_line, t_map *map, char *initials)
 	{
 		map->c_color = manage_info(map_line, map, 6);
 		if (!map->c_color)
-			return (write(1, "Duplicated info\n", 16), 1);
-	}
-	if (!ft_strncmp(initials, "EA", 2))
-	{
-		map->e_text = manage_info(map_line, map, 4);
-		if (!map->e_text)
 			return (write(1, "Duplicated info\n", 16), 1);
 	}
 	return (0);
@@ -62,17 +62,17 @@ int	insert_info(char *map_line, t_map *map, char *initials)
 
 int	element_initials(char *initials)
 {
-	if (!ft_strncmp(initials, "NO", 2))
+	if (!ft_strncmp(initials, "NO", 3))
 		return (1);
-	if (!ft_strncmp(initials, "SO", 2))
+	if (!ft_strncmp(initials, "SO", 3))
 		return (1);
-	if (!ft_strncmp(initials, "WE", 2))
+	if (!ft_strncmp(initials, "WE", 3))
 		return (1);
-	if (!ft_strncmp(initials, "EA", 2))
+	if (!ft_strncmp(initials, "EA", 3))
 		return (1);
-	if (!ft_strncmp(initials, "F ", 2))
+	if (!ft_strncmp(initials, "F ", 3))
 		return (1);
-	if (!ft_strncmp(initials, "C ", 2))
+	if (!ft_strncmp(initials, "C ", 3))
 		return (1);
 	return (0);
 }
@@ -81,20 +81,26 @@ int	get_map_info(t_map *map)
 {
 	int		i;
 	char	*initials;
+	int		j;
 
 	i = -1;
 	while (map->full_map[++i])
 	{
-		initials = ft_substr(map->full_map[i], 0, 2);
+		j = 0;
+		while(map->full_map[i][j] == ' ')
+			j++;
+		initials = ft_substr(map->full_map[i], j, 2);
 		if (element_initials(initials))
 		{
 			if (insert_info(map->full_map[i], map, initials))
 				return (free(initials), 1);
 		}
 		else
+		{
+			free(initials);
 			break ;
+		}
 	}
-	free(initials);
 	return (0);
 }
 
@@ -109,8 +115,8 @@ int	check_map_info(t_map *map)
 	if (!map->w_text)
 		return (write(1, "Missing WEST texture\n", 21), 1);
 	if (!map->f_color)
-		return (write(1, "Missing Floor color\n", 21), 1);
+		return (write(1, "Missing Floor color\n", 20), 1);
 	if (!map->c_color)
-		return (write(1, "Missing Ceiling color\n", 23), 1);
+		return (write(1, "Missing Ceiling color\n", 22), 1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:41:51 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/08 14:24:56 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 13:45:31 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,13 @@ typedef struct c_map
 	char	*f_color;
 	char	*c_color;
 	char	**map;
+	int		map_h;
+	int		map_w;
 }	t_map;
 
+//parse 
+char	*color_extraction(char **new);
+char	*extract_color_info(char *str);
 //checkmap utils
 int		start_of_map(char *str);
 int		validate_color(char *color);
@@ -37,7 +42,7 @@ int		count_chars(char **map, char to_search);
 int		valid_map_char(char c);
 int		is_there_double_nl(char *str);
 //mapfile utils
-char	*clean_map_info(char *map_line);
+char	*clean_map_info(char *map_line, int type);
 char	*manage_info(char *map_line, t_map *map, int type);
 int		ft_split_len(char **split);
 int		read_map(t_map *map, char *file);
@@ -45,7 +50,9 @@ void	create_map(t_map *map);
 //checkmap
 int		check_extension(char *str);
 int		validate_map(t_map *map);
+int		map_borders_valid(char **map);
 int		check_map(char *file, t_map *map);
+void	set_size(t_map *map);
 //check_map_info
 int		check_map_info(t_map *map);
 int		insert_info(char *map_line, t_map *map, char *initials);
