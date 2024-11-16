@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:39:53 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/16 16:50:14 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:04:04 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ char	*ft_joinfree(char *buffer, char *aux)
 
 int	are_all_digits(const char *str)
 {
-	while(*str)
+	while (*str)
 	{
 		if (!ft_isdigit(*str))
-			return(0);
+			return (0);
 		str++;
 	}
-	return(1);
+	return (1);
 }
 
 int	validate_color(char *color)

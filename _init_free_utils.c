@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:41:54 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/16 19:00:14 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:03:11 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	replace_spaces(t_map *map)
 	{
 		j = 0;
 		while (map->map[i][j] == ' ')
-				j++;
+			j++;
 		if (j > 0)
 			ft_memset((void *)map->map[i], '1', j);
 	}
@@ -60,7 +60,7 @@ void	free_map(t_map *map)
 		free_split(map->full_map);
 	if (map->map)
 		free_split(map->map);
-	if(map->map_str)
+	if (map->map_str)
 		free(map->map_str);
 	if (map->n_text)
 		free(map->n_text);

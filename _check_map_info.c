@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:55:53 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/16 15:39:29 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:02:27 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	get_map_info(t_map *map)
 	while (map->full_map[++i])
 	{
 		j = 0;
-		while(map->full_map[i][j] == ' ')
+		while (map->full_map[i][j] == ' ')
 			j++;
 		initials = ft_substr(map->full_map[i], j, 2);
 		if (element_initials(initials))

@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 22:59:10 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/16 19:00:54 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:22:56 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,46 +77,51 @@ void	calculate_directions(t_game *game, double d_alpha);
 void	check_movement(t_game *game, double move);
 void	generate_frame(t_game *game);
 void	free_all(t_game *game);
-//
-char	*ft_joinfree(char *buffer, char *aux);
-int		main_parse(int argc, char **argv, t_map *map);
-void	print_map(t_map *map);
-int		check_map(char *file, t_map *map);
-
-//parse 
-char	*color_extraction(char **new);
-char	*extract_color_info(char *str);
+//check_map_info
+int		insert_info_two(char *map_line, t_map *map, char *initials);
+int		insert_info(char *map_line, t_map *map, char *initials);
+int		element_initials(char *initials);
+int		get_map_info(t_map *map);
+int		check_map_info(t_map *map);
 //checkmap utils
-int		start_of_map(char *str);
+int		are_all_digits(const char *str);
 int		validate_color(char *color);
 int		count_chars(char **map, char to_search);
 int		valid_map_char(char c);
-int		is_there_double_nl(char *str);
+char	*ft_joinfree(char *buffer, char *aux);
+//checkmap ut 2
+int		ft_split_len(char **split);
 int		is_player_char(char p);
+int		check_extension(char *str);
+int		start_of_map(char *str);
+int		is_there_double_nl(char *str);
+//checkmap
+int		zero_is_incorrect(char **map, int i, int j);
+int		map_is_valid(char **map);
+int		map_borders_valid(char **map);
+void	set_size(t_map *map);
+int		validate_map(t_map *map);
+//utilites
+char	*remove_spaces_end(char **full_map, int i);
+//parse 
+void	print_map(t_map *map);//borrar
+char	*color_extraction(char **new);
+char	*extract_color_info(char *str);
+int		main_parse(int argc, char **argv, t_map *map);
+int		check_map(char *file, t_map *map);
+
 //mapfile utils
 char	*clean_map_info(char *map_line, int type);
 char	*manage_info(char *map_line, t_map *map, int type);
-int		ft_split_len(char **split);
 int		read_map(t_map *map, char *file);
+int		ft_space(char *str);
 void	create_map(t_map *map);
-//checkmap
-int		invalid_space(char **map, int i);
-int		check_extension(char *str);
-int		validate_map(t_map *map);
-int		map_borders_valid(char **map);
-int		check_map(char *file, t_map *map);
-void	set_size(t_map *map);
-//check_map_info
-int		check_map_info(t_map *map);
-int		insert_info(char *map_line, t_map *map, char *initials);
-int		insert_info_two(char *map_line, t_map *map, char *initials);
-int		element_initials(char *initials);
-int		get_map_info(t_map *map);
+
 //inits and frees
 void	replace_spaces(t_map *map);
+int		invalid_space(char **map, int i);
 void	init_map(t_map *map);
 void	free_map(t_map *map);
 void	free_split(char **split);
-
 
 #endif

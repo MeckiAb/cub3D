@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:41:24 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/16 17:31:15 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:02:41 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	start_of_map(char *str)
 	i = ft_strlen(str) - 1;
 	while (i >= 0 && (str[i] == '\n' || str[i] == ' ' || str[i] == '\t'))
 		i--;
-	while(i >= 0 && (valid_map_char(str[i])))
+	while (i >= 0 && (valid_map_char(str[i])))
 		i--;
 	return (i);
 }

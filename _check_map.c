@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:53:21 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/16 19:00:09 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/16 19:02:11 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	map_borders_valid(char **map)
 void	set_size(t_map *map)
 {
 	int	i;
-	int max_w;
+	int	max_w;
 	int	j;
 
 	i = -1;
@@ -86,7 +86,7 @@ void	set_size(t_map *map)
 	{
 		j = 0;
 		while (map->map[i][j] && map->map[i][j] != ' '
-			 && map->map[i][j] != '\t' && map->map[i][j] != '\n')
+				&& map->map[i][j] != '\t' && map->map[i][j] != '\n')
 			j++;
 		if (map->map[i][j] == ' ' && j > max_w)
 			max_w = j;

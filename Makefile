@@ -6,7 +6,7 @@
 #    By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 23:58:48 by labderra          #+#    #+#              #
-#    Updated: 2024/11/16 16:38:23 by jose-rig         ###   ########.fr        #
+#    Updated: 2024/11/16 19:06:01 by jose-rig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ initialize.c \
 raycasting.c \
 movement.c \
 _parse.c \
-_check_map_info.c \
-_check_map_utils.c  _check_map_ut_2.c _check_map.c \
+_check_map_info.c _check_map_utils.c  _check_map_ut_2.c _check_map.c \
 _map_file_utils.c _init_free_utils.c \
+_utilities.c
 
 SRC_BONUS = main_bonus.c \
 initialize_bonus.c \
