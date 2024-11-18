@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:41:54 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 12:47:49 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:57:30 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,19 @@ void	free_split(char **split)
 		i = -1;
 		while (split[++i])
 			free(split[i]);
+		free(split);
+	}
+}
+
+void	free_split_calloc(char **split, int size)
+{
+	int	i;
+
+	if (split)
+	{
+		i = 0;
+		while (i < size)
+			free(split[i++]);
 		free(split);
 	}
 }

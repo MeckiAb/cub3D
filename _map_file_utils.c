@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:52:36 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 12:23:13 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 14:12:49 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*clean_map_info(char *map_line, int type)
 	int	len;
 
 	if (type > 4)
-		return (extract_color_info(map_line));
+		return (extract_color_info(map_line, 2, ft_strlen(map_line) - 1, 0));
 	len = ft_strlen(map_line) - 1;
 	i = len;
 	while (map_line[i - 1] != ' ')

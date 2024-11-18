@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:57:42 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 13:36:44 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 14:12:41 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,31 @@ char	*color_extraction(char **new)
 	return (free_split(new), res);
 }
 
-char	*extract_color_info(char *str)
+char	*extract_color_info(char *str, int count, int i, int j)
 {
-	int		i;
-	int		j;
-	int		count;
 	char	**new;
 
-	i = ft_strlen(str) - 1;
-	count = 3;
 	new = (char **)ft_calloc(sizeof(char *), 3 + 1);
-	while (i >= 0 && count > 0)
+	while (i >= 0 && count >= 0)
 	{
 		while (i >= 0 && (str[i] == ' ' || str[i] == ','))
+		{
+			if (i > 0 && str[i] == ',')
+			{
+				i--;
+				while (i > 0 && str[i] == ' ')
+					i--;
+				if (str[i] == ',')
+					return (free_split_calloc(new, 3), NULL);
+			}
+			if (i > 0 && str[i] == ',' && str[i - 1] == ',')
+				return (free_split_calloc(new, 3), NULL);
 			i--;
+		}
 		j = i;
 		while (i >= 0 && (str[i] != ' ' && str[i] != ','))
 			i--;
-		new[count - 1] = ft_substr(str, i + 1, j - i);
-		count --;
+		new[count--] = ft_substr(str, i + 1, j - i);
 	}
 	return (color_extraction(new));
 }
