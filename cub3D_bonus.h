@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 22:59:10 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/18 16:29:36 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:20:51 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,26 @@
 //# define STEP			0.001691456			// 60 deg
 //# define STEP			0.001520906			// 1 rad
 # define STEP			0.000976562			// 45 deg
+
+typedef struct c_map
+{
+	char		**full_map;
+	char		*map_str;
+	char		*n_text;
+	char		*s_text;
+	char		*e_text;
+	char		*w_text;
+	char		*f_color;
+	char		*c_color;
+	char		**map;
+	int			map_h;
+	int			map_w;
+	double		p_x;
+	double		p_y;
+	char		facing;
+	char		*door_txt;
+	char		*m_text;
+}	t_map;
 
 typedef struct s_game
 {

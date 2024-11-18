@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:39:53 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 15:47:59 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:03:39 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	map_is_valid(char **map)
 			if (map[i][j] == '0')
 				if (zero_is_incorrect(map, i, j))
 					return (1);
+			if (!valid_map_char(map[i][j]))
+				return (1);
 		}
 	}
 	return (0);

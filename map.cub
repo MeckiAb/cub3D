@@ -4,6 +4,8 @@ WE ./src/west.png
 EA ./src/east.png
 F 74,  35,   1
 C 242,191,145
+DO ./src/door.png
+MO ./src/mummy1.png ./src/mummy2.png ./src/mummy3.png ./src/mummy4.png
 
 
 111111    

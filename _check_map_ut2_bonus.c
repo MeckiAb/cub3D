@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _check_map_ut2.c                                   :+:      :+:    :+:   */
+/*   _check_map_ut2_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 15:41:24 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 17:59:53 by jose-rig         ###   ########.fr       */
+/*   Created: 2024/11/18 18:05:01 by jose-rig          #+#    #+#             */
+/*   Updated: 2024/11/18 18:17:24 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3D_bonus.h"
 
 int	is_player_char(char c)
 {
@@ -21,7 +21,7 @@ int	is_player_char(char c)
 
 int	valid_map_char(char c)
 {
-	if (c == ' ' || c == '1' || c == '0')
+	if (c == ' ' || c == '1' || c == '0' || c == 'D' || c == 'M')
 		return (1);
 	if (is_player_char(c))
 		return (1);
