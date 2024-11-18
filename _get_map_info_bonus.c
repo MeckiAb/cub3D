@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:09:15 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 18:21:36 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:36:58 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,32 @@
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
+
+void	print_map_bonus(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	printf("FULL MAP:\n");
+	while (map->full_map[i])
+		printf("|%s|\n", map->full_map[i++]);
+	printf("NO:%s\n", map->n_text);
+	printf("SO:%s\n", map->s_text);
+	printf("EA:%s\n", map->e_text);
+	printf("WE:%s\n", map->w_text);
+	printf("FC:%s\n", map->f_color);
+	printf("CC:%s\n", map->c_color);
+	printf("MAP:\n");
+	i = 0;
+	while (map->map[i])
+		printf("|%s|\n", map->map[i++]);
+	printf("HEIGHT:%i\n", map->map_h);
+	printf("WIDTH:%i\n", map->map_w);
+	printf("PX:%f\n", map->p_x);
+	printf("PY:%f\n", map->p_y);
+	printf("DOOR:%s\n", map->door_txt);
+	printf("MONST:%s\n", map->m_text);
+}
 
 char	*manage_info(char *map_line, t_map *map, int type)
 {
@@ -77,6 +103,12 @@ int	insert_info_two(char *map_line, t_map *map, char *initials)
 		if (!map->door_txt)
 			return (write(1, "Duplicated info\n", 16), 1);
 	}
+	if (!ft_strncmp(initials, "MO", 2))
+	{
+		map->m_text = manage_info(map_line, map, -1);
+		if (!map->m_text)
+			return (write(1, "Duplicated info\n", 16), 1);
+	}
 	return (0);
 }
 
@@ -100,12 +132,6 @@ int	insert_info(char *map_line, t_map *map, char *initials)
 		if (!map->w_text)
 			return (write(1, "Duplicated info\n", 16), 1);
 	}
-	if (!ft_strncmp(initials, "MO", 2))
-	{
-		map->m_text = manage_info(map_line, map, -1);
-		if (!map->m_text)
-			return (write(1, "Duplicated info\n", 16), 1);
-	}
 	if (insert_info_two(map_line, map, initials))
 		return (1);
 	return (free(initials), 0);
@@ -126,6 +152,8 @@ int	element_initials(char *initials)
 	if (!ft_strncmp(initials, "C ", 3))
 		return (1);
 	if (!ft_strncmp(initials, "DO", 3))
+		return (1);
+	if (!ft_strncmp(initials, "MO", 3))
 		return (1);
 	return (0);
 }
@@ -154,5 +182,6 @@ int	get_map_info(t_map *map)
 			break ;
 		}
 	}
+	print_map_bonus(map);
 	return (0);
 }

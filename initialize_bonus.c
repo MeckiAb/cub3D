@@ -6,78 +6,99 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:48 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/18 16:23:30 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:50:35 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
-void	free_all(t_game *game, int free_text)
+void	free_all(t_game *game)
 {
-	int	i;
-
-	mlx_delete_texture(game->n_texture);
-	mlx_delete_texture(game->s_texture);
-	mlx_delete_texture(game->e_texture);
-	mlx_delete_texture(game->w_texture);
-	mlx_delete_image(game->mlx, game->img);
-	mlx_terminate(game->mlx);
-	i = 0;
-	while (game->map && game->map[i])
-		free(game->map[i++]);
-	if (game->map)
-		free(game->map);
-	free(game);
+	if (game && game->n_texture)
+		mlx_delete_texture(game->n_texture);
+	if (game && game->s_texture)
+		mlx_delete_texture(game->s_texture);
+	if (game && game->e_texture)
+		mlx_delete_texture(game->e_texture);
+	if (game && game->w_texture)
+		mlx_delete_texture(game->w_texture);
+	if (game)
+	{
+		mlx_delete_image(game->mlx, game->img);
+		mlx_terminate(game->mlx);
+		free_map_bonus(game->t_map);
+		free(game);
+	}
 }
 
-static int	load_map(t_game *game, char *map_file)
-{
-	char	*map_mock ="1111111.1001001.1000001.1000001.1000001.100N001.1111111";
-	
-	(void)map_file;
-	game->map = ft_split(map_mock, '.');
-	game->map_w = 7;
-	game->map_h = 7;
-	game->pos[0] = 3.5;
-	game->pos[1] = 1.5;
-	game->alpha = PI * 180;
+static int	load_map(t_game *game)
+{	
+	game->map = game->t_map->map;
+	game->map_w = game->t_map->map_w;
+	game->map_h = game->t_map->map_h;
+	game->pos[0] = game->t_map->p_x + 0.5;
+	game->pos[1] = game->t_map->p_y + 0.5;
+	/* game->pos[0] = 3.5;
+	game->pos[1] = 4.5; */
+	if (game->t_map->facing == 'N')
+		game->alpha = PI * 0.5;
+	if (game->t_map->facing == 'E')
+		game->alpha = PI * 1.0;
+	if (game->t_map->facing == 'S')
+		game->alpha = PI * 1.5;
+	if (game->t_map->facing == 'W')
+		game->alpha = PI * 0.0;
 	game->dir[0] = cos(game->alpha);
 	game->dir[1] = sin(game->alpha);
 	return (-1 * (game->map == NULL));
 }
 
-static int load_textures(t_game *game, char *map_file)
+static int load_textures(t_game *game)
 {
-	(void)map_file;
-	game->n_texture = mlx_load_png("src/north.png");
-	game->s_texture = mlx_load_png("src/south.png");
-	game->e_texture = mlx_load_png("src/east.png");
-	game->w_texture = mlx_load_png("src/west.png");
-	game->ppu = game->n_texture->width;
+	game->n_texture = mlx_load_png(game->t_map->n_text);
+	game->s_texture = mlx_load_png(game->t_map->s_text);
+	game->e_texture = mlx_load_png(game->t_map->e_text);
+	game->w_texture = mlx_load_png(game->t_map->w_text);
+	//game->d_texture = mlx_load_png(game->t_map->door_txt);
+	//game->m_texture = load_enemy_textures(game->t_map->m_text);
+	if (game->n_texture)
+		game->ppu = game->n_texture->width;
 	game->ceiling = 0xebc934ff;
 	game->floor = 0x915603ff;
 	return (game->n_texture && game->s_texture && game->e_texture
-		&& game->w_texture);
+		&& game->w_texture /* && game->d_texture */ /* && game->m_texture */);
 }
 
-t_game	*init_game(char *map_file)
+static uint32_t load_colors(char *color)
+{
+	char		**new;
+	uint32_t	result;
+
+	new = ft_split(color, ',');
+	result = atoi(new[0]) << 24 | atoi(new[1]) << 16 | atoi(new[2]) << 8 | 0xff;
+	free_split(new);
+	return (result);
+}
+
+t_game	*init_game(t_map *t_map)
 {
 	t_game	*game;
 
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (NULL);
-	game->mlx = mlx_init(IMG_WIDTH, IMG_HEIGHT, "Piramid Run", 0);
+	game->t_map = t_map;
+	game->mlx = mlx_init(IMG_WIDTH, IMG_HEIGHT, "Piramid RunBonus", 0);
 	if (!game->mlx)
 		return (NULL);
 	game->img = mlx_new_image(game->mlx, IMG_WIDTH, IMG_HEIGHT);
-	if (load_textures(game, map_file) == -1 || load_map(game, map_file) == -1
+	if (load_textures(game) == 0 || load_map(game) == -1
 			|| !game->img)
 		return (NULL);
+	game->ceiling = load_colors(game->t_map->c_color);
+	game->floor = load_colors(game->t_map->f_color);
 	game->img_w = IMG_WIDTH;
 	game->img_h = IMG_HEIGHT;
-	game->cursor_x = IMG_WIDTH / 2;
-	game->cursor_y = IMG_HEIGHT / 2;
 	mlx_set_mouse_pos(game->mlx, IMG_WIDTH / 2 , IMG_HEIGHT / 2);
 	return (game);
 }
