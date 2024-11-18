@@ -1,60 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _check_map_ut_2.c                                  :+:      :+:    :+:   */
+/*   _check_map_ut2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:41:24 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/16 19:02:41 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:03:37 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	is_player_char(char p)
+int	is_player_char(char c)
 {
-	if (p == 'N' || p == 'S' || p == 'E' || p == 'W')
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
 	return (0);
 }
 
-int	ft_split_len(char **split)
+int	valid_map_char(char c)
 {
-	int	i;
-
-	i = 0;
-	while (split[i])
-		i++;
-	return (i);
-}
-
-int	check_extension(char *str)
-{
-	int		i;
-	int		len;
-	char	*temp;
-
-	temp = NULL;
-	if (!str || !str[0])
+	if (c == ' ' || c == '1' || c == '0')
 		return (1);
-	len = ft_strlen(str) - 1;
-	i = len;
-	while (i > 0 && str[i] != '.')
-		i--;
-	if (len - i != 3 || i == 0)
-		return (1);
-	temp = ft_substr(str, i, 4);
-	if (ft_strncmp(temp, ".cub", 4))
-		return (free(temp), 1);
-	i = -1;
-	len = 0;
-	while (str[++i])
-		if (str[i] == '.')
-			len++;
-	if (len != 1)
-		return (free(temp), 1);
-	return (free(temp), 0);
+	return (0);
 }
 
 int	start_of_map(char *str)
@@ -95,4 +64,28 @@ int	is_there_double_nl(char *str)
 		j--;
 	}
 	return (0);
+}
+
+void	set_size(t_map *map)
+{
+	int	i;
+	int	max_w;
+	int	j;
+
+	i = -1;
+	max_w = 0;
+	while (map->map[++i])
+	{
+		j = 0;
+		while (map->map[i][j] && map->map[i][j] != ' '
+				&& map->map[i][j] != '\t' && map->map[i][j] != '\n')
+			j++;
+		if (map->map[i][j] == ' ' && j > max_w)
+			max_w = j;
+		else if (ft_strlen(map->map[i]) > (unsigned long)max_w
+			&& (map->map[i][j] != ' ' || j == 0))
+			max_w = ft_strlen(map->map[i]);
+	}
+	map->map_h = i;
+	map->map_w = max_w;
 }

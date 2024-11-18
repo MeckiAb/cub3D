@@ -6,27 +6,11 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:41:54 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 13:57:30 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 14:57:16 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-/* void	replace_spaces(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (map->map[++i])
-	{
-		j = 0;
-		while (map->map[i][j] == ' ')
-			j++;
-		if (j > 0)
-			ft_memset((void *)map->map[i], ' ', j);
-	}
-} */
 
 void	init_map(t_map *map)
 {

@@ -1,16 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _check_map_info.c                                  :+:      :+:    :+:   */
+/*   _get_map_info.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:55:53 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/16 19:02:27 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:35:04 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+char	*manage_info(char *map_line, t_map *map, int type)
+{
+	char	*element;
+
+	if (type == 1)
+		element = map->n_text;
+	if (type == 2)
+		element = map->s_text;
+	if (type == 3)
+		element = map->w_text;
+	if (type == 4)
+		element = map->e_text;
+	if (type == 5)
+		element = map->f_color;
+	if (type == 6)
+		element = map->c_color;
+	if (element)
+		return (free(element), NULL);
+	return (clean_map_info(map_line, type));
+}
 
 int	insert_info_two(char *map_line, t_map *map, char *initials)
 {
@@ -101,22 +122,5 @@ int	get_map_info(t_map *map)
 			break ;
 		}
 	}
-	return (0);
-}
-
-int	check_map_info(t_map *map)
-{
-	if (!map->n_text)
-		return (write(1, "Missing NORTH texture\n", 22), 1);
-	if (!map->s_text)
-		return (write(1, "Missing SOUTH texture\n", 22), 1);
-	if (!map->e_text)
-		return (write(1, "Missing EAST texture\n", 21), 1);
-	if (!map->w_text)
-		return (write(1, "Missing WEST texture\n", 21), 1);
-	if (!map->f_color)
-		return (write(1, "Missing Floor color\n", 20), 1);
-	if (!map->c_color)
-		return (write(1, "Missing Ceiling color\n", 22), 1);
 	return (0);
 }

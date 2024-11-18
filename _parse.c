@@ -6,56 +6,27 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:57:42 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 14:12:41 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:52:04 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-char	*color_extraction(char **new)
+/* void	replace_spaces(t_map *map)
 {
-	char	*res;
-	int		i;
+	int	i;
+	int	j;
 
-	res = NULL;
 	i = -1;
-	while (new[++i])
+	while (map->map[++i])
 	{
-		res = ft_joinfree(res, new[i]);
-		if (new[i + 1])
-			res = ft_joinfree(res, ",");
+		j = 0;
+		while (map->map[i][j] == ' ')
+			j++;
+		if (j > 0)
+			ft_memset((void *)map->map[i], ' ', j);
 	}
-	return (free_split(new), res);
-}
-
-char	*extract_color_info(char *str, int count, int i, int j)
-{
-	char	**new;
-
-	new = (char **)ft_calloc(sizeof(char *), 3 + 1);
-	while (i >= 0 && count >= 0)
-	{
-		while (i >= 0 && (str[i] == ' ' || str[i] == ','))
-		{
-			if (i > 0 && str[i] == ',')
-			{
-				i--;
-				while (i > 0 && str[i] == ' ')
-					i--;
-				if (str[i] == ',')
-					return (free_split_calloc(new, 3), NULL);
-			}
-			if (i > 0 && str[i] == ',' && str[i - 1] == ',')
-				return (free_split_calloc(new, 3), NULL);
-			i--;
-		}
-		j = i;
-		while (i >= 0 && (str[i] != ' ' && str[i] != ','))
-			i--;
-		new[count--] = ft_substr(str, i + 1, j - i);
-	}
-	return (color_extraction(new));
-}
+} */
 
 void	print_map(t_map *map)
 {
@@ -81,47 +52,32 @@ void	print_map(t_map *map)
 	printf("PY:%f\n", map->p_y);
 }
 
-int	check_invalids(t_map *t_map, char **map)
+int	check_extension(char *str)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		len;
+	char	*temp;
 
-	i = -1;
-	while (map[++i])
-	{
-		if (ft_strlen(map[i]) == 1)
-			return (1);
-	}
-	i = -1;
-	while (map[++i])
-	{
-		j = -1;
-		while (map[i][++j])
-		{
-			if (is_player_char(map[i][j]))
-			{
-				t_map->p_x = j;
-				t_map->p_y = i;
-				t_map->facing = map[i][j];
-			}
-		}
-	}
-	return (0);
-}
-
-int	check_map(char *file, t_map *map)
-{
-	if (read_map(map, file))
+	temp = NULL;
+	if (!str || !str[0])
 		return (1);
-	if (get_map_info(map) || check_map_info(map))
-		return (write(2, "Invalid map information\n", 24), 1);
-	if (validate_color(map->c_color) || validate_color(map->f_color))
-		return (write(2, "Invalid color information\n", 26), 1);
-	create_map(map);
-	if (validate_map(map) || check_invalids(map, map->map))
-		return (write(2, "Invalid map syntax\n", 19), 1);
-	space_fill(map->map, map->map_w);
-	return (0);
+	len = ft_strlen(str) - 1;
+	i = len;
+	while (i > 0 && str[i] != '.')
+		i--;
+	if (len - i != 3 || i == 0)
+		return (1);
+	temp = ft_substr(str, i, 4);
+	if (ft_strncmp(temp, ".cub", 4))
+		return (free(temp), 1);
+	i = -1;
+	len = 0;
+	while (str[++i])
+		if (str[i] == '.')
+			len++;
+	if (len != 1)
+		return (free(temp), 1);
+	return (free(temp), 0);
 }
 
 int	main_parse(int argc, char **argv, t_map *map)
