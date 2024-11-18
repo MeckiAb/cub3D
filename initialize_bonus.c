@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:48 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/16 11:58:42 by labderra         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:23:30 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
-void	free_all(t_game *game)
+void	free_all(t_game *game, int free_text)
 {
 	int	i;
 

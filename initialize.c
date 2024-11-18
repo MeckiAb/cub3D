@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:48 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/18 13:32:22 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:09:24 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,21 @@
 
 void	free_all(t_game *game)
 {
-	mlx_delete_texture(game->n_texture);
-	mlx_delete_texture(game->s_texture);
-	mlx_delete_texture(game->e_texture);
-	mlx_delete_texture(game->w_texture);
-	mlx_delete_image(game->mlx, game->img);
-	mlx_terminate(game->mlx);
-	free_map(game->t_map);
-	free(game);
+	if (game && game->n_texture)
+		mlx_delete_texture(game->n_texture);
+	if (game && game->s_texture)
+		mlx_delete_texture(game->s_texture);
+	if (game && game->e_texture)
+		mlx_delete_texture(game->e_texture);
+	if (game && game->w_texture)
+		mlx_delete_texture(game->w_texture);
+	if (game)
+	{
+		mlx_delete_image(game->mlx, game->img);
+		mlx_terminate(game->mlx);
+		free_map(game->t_map);
+		free(game);
+	}
 }
 
 static int	load_map(t_game *game)
@@ -29,19 +36,18 @@ static int	load_map(t_game *game)
 	game->map = game->t_map->map;
 	game->map_w = game->t_map->map_w;
 	game->map_h = game->t_map->map_h;
-	game->pos[1] = game->t_map->p_x + 0.5;
-	game->pos[0] = game->t_map->p_y + 0.5;
+	game->pos[0] = game->t_map->p_x + 0.5;
+	game->pos[1] = game->t_map->p_y + 0.5;
 	/* game->pos[0] = 3.5;
 	game->pos[1] = 4.5; */
 	if (game->t_map->facing == 'N')
-		game->alpha = PI * 0;
-	if (game->t_map->facing == 'E')
-		game->alpha = PI * 1.5;
-	if (game->t_map->facing == 'S')
-		game->alpha = PI * 1;
-	if (game->t_map->facing == 'W')
 		game->alpha = PI * 0.5;
-	//game->alpha = PI * 0; //(0, 90,180, 270)
+	if (game->t_map->facing == 'E')
+		game->alpha = PI * 1.0;
+	if (game->t_map->facing == 'S')
+		game->alpha = PI * 1.5;
+	if (game->t_map->facing == 'W')
+		game->alpha = PI * 0.0;
 	game->dir[0] = cos(game->alpha);
 	game->dir[1] = sin(game->alpha);
 	return (-1 * (game->map == NULL));
@@ -53,7 +59,8 @@ static int load_textures(t_game *game)
 	game->s_texture = mlx_load_png(game->t_map->s_text);
 	game->e_texture = mlx_load_png(game->t_map->e_text);
 	game->w_texture = mlx_load_png(game->t_map->w_text);
-	game->ppu = game->n_texture->width;
+	if(game->n_texture)
+		game->ppu = game->n_texture->width;
 	game->ceiling = 0xebc934ff;
 	//game->ceiling = 0xebc934ff;
 	game->floor = 0x915603ff;
@@ -82,11 +89,11 @@ t_game	*init_game(t_map *t_map)
 	game->t_map = t_map;
 	game->mlx = mlx_init(IMG_WIDTH, IMG_HEIGHT, "Piramid Run", 0);
 	if (!game->mlx)
-		return (NULL);
+		return (free_all(game), NULL);
 	game->img = mlx_new_image(game->mlx, IMG_WIDTH, IMG_HEIGHT);
-	if (load_textures(game) == -1 || load_map(game) == -1
+	if (load_textures(game) == 0 || load_map(game) == -1
 			|| !game->img)
-		return (NULL);
+		return (free_all(game), NULL);
 	game->ceiling = load_colors(game->t_map->c_color);
 	game->floor = load_colors(game->t_map->f_color);
 	game->img_w = IMG_WIDTH;

@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:52:36 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 15:35:00 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 17:57:06 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char	*extract_color_info(char *str, int count, int i, int j)
 	{
 		while (i >= 0 && (str[i] == ' ' || str[i] == ','))
 		{
+			if (i > 0 && str[i] == ',' && str[i - 1] == ',')
+				return (free_split_calloc(new, 3), NULL);
 			if (i > 0 && str[i] == ',')
 			{
 				i--;
@@ -45,14 +47,12 @@ char	*extract_color_info(char *str, int count, int i, int j)
 				if (str[i] == ',')
 					return (free_split_calloc(new, 3), NULL);
 			}
-			if (i > 0 && str[i] == ',' && str[i - 1] == ',')
-				return (free_split_calloc(new, 3), NULL);
 			i--;
 		}
 		j = i;
 		while (i >= 0 && (str[i] != ' ' && str[i] != ','))
 			i--;
-		new[count--] = ft_substr(str, i + 1, j - i);
+		new[count--] = ft_substr(str, i + 1, j - i + 1);
 	}
 	return (color_extraction(new));
 }
