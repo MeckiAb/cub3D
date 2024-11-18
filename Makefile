@@ -6,7 +6,7 @@
 #    By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 23:58:48 by labderra          #+#    #+#              #
-#    Updated: 2024/11/18 18:36:35 by jose-rig         ###   ########.fr        #
+#    Updated: 2024/11/18 18:58:30 by jose-rig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC_BONUS = main_bonus.c \
 initialize_bonus.c \
 raycasting_bonus.c \
 movement_bonus.c \
-_parse.c _check_map.c _create_map.c\
+_parse.c _check_map.c _create_map_bonus.c\
 _get_map_info_bonus.c _get_map_info2_bonus.c \
 _check_map_ut.c _check_map_ut2_bonus.c \
 _utilities.c _init_free_utils_bonus.c \

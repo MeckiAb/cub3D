@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:47:45 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/18 16:29:47 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:54:24 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,17 @@ void	handle(void *param)
 int	main(int argc, char **argv)
 {
 	t_game	*game;
+	t_map	map;
 	
-	if (argc != 2)
-		return (1);
-	game = init_game(argv[1]);
+	if (main_parse(argc, argv, &map))
+		return (free_map(&map), 1);
+	game = init_game(&map);
 	if (!game)
 		return (1);
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 	mlx_loop_hook(game->mlx, &handle, game);
 	mlx_loop(game->mlx);
+	print_map_bonus(&map);
 	free_all(game);
 	
 	return (0);

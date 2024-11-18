@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:48 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/18 17:09:24 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:01:28 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,6 @@ static int load_textures(t_game *game)
 	game->w_texture = mlx_load_png(game->t_map->w_text);
 	if(game->n_texture)
 		game->ppu = game->n_texture->width;
-	game->ceiling = 0xebc934ff;
-	//game->ceiling = 0xebc934ff;
-	game->floor = 0x915603ff;
 	return (game->n_texture && game->s_texture && game->e_texture
 		&& game->w_texture);
 }

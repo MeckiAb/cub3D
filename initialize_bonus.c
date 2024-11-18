@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:48 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/18 18:50:35 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 20:01:45 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	free_all(t_game *game)
 {
+	int	i;
+
+	i = 0;
 	if (game && game->n_texture)
 		mlx_delete_texture(game->n_texture);
 	if (game && game->s_texture)
@@ -22,11 +25,20 @@ void	free_all(t_game *game)
 		mlx_delete_texture(game->e_texture);
 	if (game && game->w_texture)
 		mlx_delete_texture(game->w_texture);
+	if (game && game->d_texture)
+	{
+		while(i < 4)
+		{
+			mlx_delete_texture(game->d_texture[i]);
+			i++;
+		}
+		free(game->d_texture);
+	}
 	if (game)
 	{
 		mlx_delete_image(game->mlx, game->img);
 		mlx_terminate(game->mlx);
-		free_map_bonus(game->t_map);
+		free_map(game->t_map);
 		free(game);
 	}
 }
@@ -38,8 +50,6 @@ static int	load_map(t_game *game)
 	game->map_h = game->t_map->map_h;
 	game->pos[0] = game->t_map->p_x + 0.5;
 	game->pos[1] = game->t_map->p_y + 0.5;
-	/* game->pos[0] = 3.5;
-	game->pos[1] = 4.5; */
 	if (game->t_map->facing == 'N')
 		game->alpha = PI * 0.5;
 	if (game->t_map->facing == 'E')
@@ -53,20 +63,36 @@ static int	load_map(t_game *game)
 	return (-1 * (game->map == NULL));
 }
 
+mlx_texture_t	**load_door_textures(char *str)
+{
+	mlx_texture_t	**txts;
+	char			**split;
+	int				i;
+
+	i = 0;
+	txts = malloc(sizeof(mlx_texture_t *) * 4);
+	split = ft_split(str, ' ');
+	txts[0] = mlx_load_png(split[1]);
+	txts[1] = mlx_load_png(split[2]);
+	txts[2] = mlx_load_png(split[3]);
+	txts[3] = mlx_load_png(split[4]);
+	while (i < 4)
+		if (!txts[i])
+			return (free_split(split), free(txts), NULL);
+	return (free_split(split), txts);
+}
+
 static int load_textures(t_game *game)
 {
 	game->n_texture = mlx_load_png(game->t_map->n_text);
 	game->s_texture = mlx_load_png(game->t_map->s_text);
 	game->e_texture = mlx_load_png(game->t_map->e_text);
 	game->w_texture = mlx_load_png(game->t_map->w_text);
-	//game->d_texture = mlx_load_png(game->t_map->door_txt);
-	//game->m_texture = load_enemy_textures(game->t_map->m_text);
+	game->d_texture = load_door_textures(game->t_map->d_text);
 	if (game->n_texture)
 		game->ppu = game->n_texture->width;
-	game->ceiling = 0xebc934ff;
-	game->floor = 0x915603ff;
 	return (game->n_texture && game->s_texture && game->e_texture
-		&& game->w_texture /* && game->d_texture */ /* && game->m_texture */);
+		&& game->w_texture && game->d_texture);
 }
 
 static uint32_t load_colors(char *color)
@@ -90,11 +116,11 @@ t_game	*init_game(t_map *t_map)
 	game->t_map = t_map;
 	game->mlx = mlx_init(IMG_WIDTH, IMG_HEIGHT, "Piramid RunBonus", 0);
 	if (!game->mlx)
-		return (NULL);
+		return (free_all(game), NULL);
 	game->img = mlx_new_image(game->mlx, IMG_WIDTH, IMG_HEIGHT);
 	if (load_textures(game) == 0 || load_map(game) == -1
 			|| !game->img)
-		return (NULL);
+		return (free_all(game), NULL);
 	game->ceiling = load_colors(game->t_map->c_color);
 	game->floor = load_colors(game->t_map->f_color);
 	game->img_w = IMG_WIDTH;

@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 22:59:10 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/18 18:47:43 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:33:39 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ typedef struct c_map
 	double		p_x;
 	double		p_y;
 	char		facing;
-	char		*door_txt;
-	char		*m_text;
+	char		*d_text;
 }	t_map;
 
 typedef struct s_game
@@ -69,8 +68,7 @@ typedef struct s_game
 	mlx_texture_t	*s_texture;
 	mlx_texture_t	*w_texture;
 	mlx_texture_t	*current_texture;
-	mlx_texture_t	*d_texture;
-	mlx_texture_t	**m_texture;
+	mlx_texture_t	**d_texture;
 	uint32_t		ceiling;
 	uint32_t		floor;
 	int				map_w;
@@ -130,7 +128,7 @@ int		check_extension(char *str);
 int		main_parse(int argc, char **argv, t_map *map);
 //inits and frees
 void	init_map(t_map *map);
-void	free_map_bonus(t_map *map);
+void	free_map(t_map *map);
 void	free_split(char **split);
 void	free_split_calloc(char **split, int size);
 

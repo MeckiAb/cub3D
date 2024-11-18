@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:27:34 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 18:28:01 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:35:59 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ char	*clean_map_info(char *map_line, int type)
 
 	if (type > 4)
 		return (extract_color_info(map_line, 2, ft_strlen(map_line) - 1, 0));
+	if (type == 0)
+		return (ft_strdup(map_line));
 	len = ft_strlen(map_line) - 1;
 	i = len;
 	while (map_line[i - 1] != ' ')
@@ -85,5 +87,7 @@ int	check_map_info(t_map *map)
 		return (write(1, "Missing Floor color\n", 20), 1);
 	if (!map->c_color)
 		return (write(1, "Missing Ceiling color\n", 22), 1);
+	if (!map->d_text)
+		return (write(1, "Missing Door texture\n", 21), 1);
 	return (0);
 }

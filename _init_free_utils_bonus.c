@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:32:05 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 18:41:05 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:37:14 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	init_map(t_map *map)
 	map->w_text = NULL;
 	map->f_color = NULL;
 	map->c_color = NULL;
-	map->m_text = NULL;
-	map->door_txt = NULL;
+	map->d_text = NULL;
 	map->map = NULL;
 	map->map_h = 0;
 	map->map_w = 0;
@@ -31,7 +30,7 @@ void	init_map(t_map *map)
 	map->p_y = 0;
 }
 
-void	free_map_bonus(t_map *map)
+void	free_map(t_map *map)
 {
 	if (map->full_map)
 		free_split(map->full_map);
@@ -51,10 +50,8 @@ void	free_map_bonus(t_map *map)
 		free(map->f_color);
 	if (map->c_color)
 		free(map->c_color);
-	if (map->m_text)
-		free(map->m_text);
-	if (map->door_txt)
-		free(map->door_txt);
+	if (map->d_text)
+		free(map->d_text);
 }
 
 void	free_split(char **split)

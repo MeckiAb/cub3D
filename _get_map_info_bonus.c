@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:09:15 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 18:36:58 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:35:31 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,16 @@ void	print_map_bonus(t_map *map)
 	printf("WIDTH:%i\n", map->map_w);
 	printf("PX:%f\n", map->p_x);
 	printf("PY:%f\n", map->p_y);
-	printf("DOOR:%s\n", map->door_txt);
-	printf("MONST:%s\n", map->m_text);
+	printf("DOOR:%s\n", map->d_text);
 }
 
 char	*manage_info(char *map_line, t_map *map, int type)
 {
 	char	*element;
 
-	if (type == -1)
-		element = map->m_text;
+	printf("MNG INFO: %s\n", map_line);
 	if (type == 0)
-		element = map->door_txt;
+		element = map->d_text;
 	if (type == 1)
 		element = map->n_text;
 	if (type == 2)
@@ -99,14 +97,8 @@ int	insert_info_two(char *map_line, t_map *map, char *initials)
 	}
 	if (!ft_strncmp(initials, "DO", 2))
 	{
-		map->door_txt = manage_info(map_line, map, 0);
-		if (!map->door_txt)
-			return (write(1, "Duplicated info\n", 16), 1);
-	}
-	if (!ft_strncmp(initials, "MO", 2))
-	{
-		map->m_text = manage_info(map_line, map, -1);
-		if (!map->m_text)
+		map->d_text = manage_info(map_line, map, 0);
+		if (!map->d_text)
 			return (write(1, "Duplicated info\n", 16), 1);
 	}
 	return (0);
@@ -182,6 +174,5 @@ int	get_map_info(t_map *map)
 			break ;
 		}
 	}
-	print_map_bonus(map);
 	return (0);
 }

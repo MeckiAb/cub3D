@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 18:05:01 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 18:17:24 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:36:21 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_player_char(char c)
 
 int	valid_map_char(char c)
 {
-	if (c == ' ' || c == '1' || c == '0' || c == 'D' || c == 'M')
+	if (c == ' ' || c == '1' || c == '0' || c == 'D')
 		return (1);
 	if (is_player_char(c))
 		return (1);

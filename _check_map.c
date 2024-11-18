@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:53:21 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 16:33:02 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:04:10 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	check_map(char *file, t_map *map)
 	create_map(map);
 	if (validate_map(map) || check_invalids(map, map->map))
 		return (write(2, "Invalid map syntax\n", 19), 1);
-	print_map(map);
+	//print_map(map);
 	space_fill(map->map, map->map_w);
 	return (0);
 }
