@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:52:36 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/16 19:12:26 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:23:13 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,6 @@ int	read_map(t_map *map, char *file)
 		return (write(2, "Map is empty\n", 13), 1);
 	map->full_map = ft_split(map->map_str, '\n');
 	return (0);
-}
-
-int	ft_space(char *str)
-{
-	int	i;
-
-	i = ft_strlen(str) - 1;
-	while (i >= 0 && (str[i] != '1'))
-		i--;
-	return (i);
 }
 
 void	create_map(t_map *map)

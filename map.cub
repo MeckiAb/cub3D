@@ -2,7 +2,7 @@ NO ./src/north.png
 SO ./src/south.png
 WE ./src/west.png
 EA ./src/east.png
-F 74,35,1
+F 74,  35,   1
 C 242,191,145
 
 

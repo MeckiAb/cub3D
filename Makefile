@@ -6,14 +6,14 @@
 #    By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 23:58:48 by labderra          #+#    #+#              #
-#    Updated: 2024/11/16 19:06:01 by jose-rig         ###   ########.fr        #
+#    Updated: 2024/11/18 13:06:08 by jose-rig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 LIBFT = libft/libft.a
 MLX42 = ./MLX42/build/libmlx42.a 
-MLX_FLAGS = -Iinclude -ldl -lglfw -pthread -lm
+MLX_FLAGS = -Iinclude -ldl -lglfw -pthread -lm #-fsanitize=address
 
 SRC = main.c \
 initialize.c \

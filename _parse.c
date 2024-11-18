@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:57:42 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/16 20:25:57 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:36:44 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	print_map(t_map *map)
 	i = 0;
 	printf("FULL MAP:\n");
 	while (map->full_map[i])
-		printf("%s\n", map->full_map[i++]);
+		printf("|%s|\n", map->full_map[i++]);
 	printf("NO:%s\n", map->n_text);
 	printf("SO:%s\n", map->s_text);
 	printf("EA:%s\n", map->e_text);
@@ -68,12 +68,11 @@ void	print_map(t_map *map)
 	printf("MAP:\n");
 	i = 0;
 	while (map->map[i])
-		printf("%s\n", map->map[i++]);
+		printf("|%s|\n", map->map[i++]);
 	printf("HEIGHT:%i\n", map->map_h);
 	printf("WIDTH:%i\n", map->map_w);
 	printf("PX:%f\n", map->p_x);
 	printf("PY:%f\n", map->p_y);
-	
 }
 
 int	check_invalids(t_map *t_map, char **map)
@@ -115,6 +114,7 @@ int	check_map(char *file, t_map *map)
 	create_map(map);
 	if (validate_map(map) || check_invalids(map, map->map))
 		return (write(2, "Invalid map syntax\n", 19), 1);
+	space_fill(map->map, map->map_w);
 	return (0);
 }
 
@@ -127,7 +127,6 @@ int	main_parse(int argc, char **argv, t_map *map)
 		return (write(2, "Invalid map\n", 12), 1);
 	if (check_map(argv[1], map))
 		return (1);
-	replace_spaces(map);
-	print_map(map);
+	//replace_spaces(map);
 	return (0);
 }

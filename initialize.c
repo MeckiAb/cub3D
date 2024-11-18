@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:48 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/17 15:13:34 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:32:22 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static int	load_map(t_game *game)
 	game->map = game->t_map->map;
 	game->map_w = game->t_map->map_w;
 	game->map_h = game->t_map->map_h;
-	game->pos[0] = game->t_map->p_x + 0.5;
-	game->pos[1] = game->t_map->p_y + 0.5;
+	game->pos[1] = game->t_map->p_x + 0.5;
+	game->pos[0] = game->t_map->p_y + 0.5;
 	/* game->pos[0] = 3.5;
 	game->pos[1] = 4.5; */
 	if (game->t_map->facing == 'N')
@@ -55,9 +55,21 @@ static int load_textures(t_game *game)
 	game->w_texture = mlx_load_png(game->t_map->w_text);
 	game->ppu = game->n_texture->width;
 	game->ceiling = 0xebc934ff;
+	//game->ceiling = 0xebc934ff;
 	game->floor = 0x915603ff;
 	return (game->n_texture && game->s_texture && game->e_texture
 		&& game->w_texture);
+}
+
+static uint32_t load_colors(char *color)
+{
+	char		**new;
+	uint32_t	result;
+
+	new = ft_split(color, ',');
+	result = atoi(new[0]) << 24 | atoi(new[1]) << 16 | atoi(new[2]) << 8 | 0xff;
+	free_split(new);
+	return (result);
 }
 
 t_game	*init_game(t_map *t_map)
@@ -75,6 +87,8 @@ t_game	*init_game(t_map *t_map)
 	if (load_textures(game) == -1 || load_map(game) == -1
 			|| !game->img)
 		return (NULL);
+	game->ceiling = load_colors(game->t_map->c_color);
+	game->floor = load_colors(game->t_map->f_color);
 	game->img_w = IMG_WIDTH;
 	game->img_h = IMG_HEIGHT;
 	return (game);

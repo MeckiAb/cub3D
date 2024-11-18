@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 22:59:10 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/18 12:12:04 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 13:36:37 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ void	set_size(t_map *map);
 int		validate_map(t_map *map);
 //utilites
 char	*remove_spaces_end(char **full_map, int i);
+int		between_walls(char *str, int j);
+void	space_fill(char **mp, size_t w);
+int		ft_space(char *str);
 //parse 
 void	print_map(t_map *map);//borrar
 char	*color_extraction(char **new);
@@ -115,11 +118,10 @@ int		check_map(char *file, t_map *map);
 char	*clean_map_info(char *map_line, int type);
 char	*manage_info(char *map_line, t_map *map, int type);
 int		read_map(t_map *map, char *file);
-int		ft_space(char *str);
 void	create_map(t_map *map);
 
 //inits and frees
-void	replace_spaces(t_map *map);
+//void	replace_spaces(t_map *map);
 void	init_map(t_map *map);
 void	free_map(t_map *map);
 void	free_split(char **split);

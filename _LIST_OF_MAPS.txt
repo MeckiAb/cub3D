@@ -7,5 +7,5 @@ textures_not_xpm.cub
 GOOD:
 test_map_hole.cub
 Decision:
-Ignoramos espacios al final de las lineas.
+rellenamos de espacios el final de las lineas que no sean igual de largas que el MaxWidth
 Son validos los espacios que esten al principio o entre paredes.

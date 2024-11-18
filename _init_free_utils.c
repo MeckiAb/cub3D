@@ -6,13 +6,13 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:41:54 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 12:14:23 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:47:49 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	replace_spaces(t_map *map)
+/* void	replace_spaces(t_map *map)
 {
 	int	i;
 	int	j;
@@ -26,7 +26,7 @@ void	replace_spaces(t_map *map)
 		if (j > 0)
 			ft_memset((void *)map->map[i], ' ', j);
 	}
-}
+} */
 
 void	init_map(t_map *map)
 {
@@ -78,18 +78,4 @@ void	free_split(char **split)
 			free(split[i]);
 		free(split);
 	}
-}
-
-int	between_walls(char *str, int j)
-{
-	int	i;
-
-	i = j;
-	while (str[j] && str[j] != '1')
-		j++;
-	while (i >= 0 && str[i] != '1')
-		i--;
-	if (i != -1 && str[j] == '1' && str[i] == '1')
-		return (1);
-	return (0);
 }
