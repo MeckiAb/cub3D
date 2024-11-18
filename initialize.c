@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:48 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/16 20:17:01 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/17 15:13:34 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	free_all(t_game *game)
 {
-
 	mlx_delete_texture(game->n_texture);
 	mlx_delete_texture(game->s_texture);
 	mlx_delete_texture(game->e_texture);

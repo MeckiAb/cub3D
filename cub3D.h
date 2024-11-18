@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 22:59:10 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/16 19:40:31 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:12:04 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,9 @@ void	create_map(t_map *map);
 
 //inits and frees
 void	replace_spaces(t_map *map);
-int		invalid_space(char **map, int i);
 void	init_map(t_map *map);
 void	free_map(t_map *map);
 void	free_split(char **split);
+int		between_walls(char *str, int j);
 
 #endif

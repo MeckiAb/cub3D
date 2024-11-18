@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:15:50 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/16 20:28:35 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 11:36:05 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	collision(t_game *game, double ph[2], double ray[2])
 	if (ph[0] < 1.0 || ph[0] > game->map_h - 1
 		|| ph[1] < 1.0 || ph[1] > game->map_w - 1)
 		return (1);
-	printf("H:%i, W:%ip0:%f - p1:%f %c / alpha:%f\n",game->map_h , game->map_w, game->pos[0], game->pos[1], game->t_map->facing, game->alpha);
+	//printf("[H:%i W:%i][pos0:%f p1:%f] [%c][alpha:%f]\n",game->map_h , game->map_w, game->pos[0], game->pos[1], game->t_map->facing, game->alpha);
 	if (ph[0] == ceil(ph[0]))
 		return (game->map[(int)ph[0] - (ray[0] < 0)][(int)ph[1]] == '1');
 	else
@@ -38,11 +38,13 @@ int	next_point(t_game *game, double photon[2], double m[2], double ray[2])
 	option_2[0] = photon[0] + m[1] * (option_2[1] - photon[1]);
 	if (fabs(option_1[0] - photon[0]) < fabs(option_2[0] - photon[0]))
 	{
+		//printf("IFp[0]:%f p[1]:%f\nop1[0]:%f op1[1]:%f\n", photon[0], photon[1], option_1[0], option_1[1]);
 		photon[0] = option_1[0];
 		photon[1] = option_1[1];
 	}
 	else
 	{
+		//printf("ELSEp[0]:%f p1[1]:%f\nop2[0]:%f op2[1]:%f\n", photon[0], photon[1], option_2[0], option_2[1]);
 		photon[0] = option_2[0];
 		photon[1] = option_2[1];
 	}
@@ -120,6 +122,7 @@ void	generate_frame(t_game *game)
 	{
 		ray[0] = game->dir[0] - game->dir[1] * (512 - i) * STEP;
 		ray[1] = game->dir[1] + game->dir[0] * (512 - i) * STEP;
+		//printf("r[0]:%f r[1]:%f\n", ray[0], ray[1]);
 		photon[0] = game->pos[0];
 		photon[1] = game->pos[1];
 		m[0] = ray[1] / ray[0];

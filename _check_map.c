@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:53:21 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/16 19:02:11 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:09:22 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,18 @@ int	zero_is_incorrect(char **map, int i, int j)
 	int	max_i;
 
 	max_i = ft_split_len(map) - 1;
-	if ((ft_strlen(map[i]) - 1) == (unsigned long)j)
+	if ((ft_strlen(map[i]) - 1) == (unsigned long)j)//ultima posicion
 		return (1);
 	if (j == 0 || i == 0 || i == max_i || map[i][j - 1] == '\n'
 			|| map[i][j + 1] == '\n')
 		return (1);
 	if (map[i][j - 1] == ' ' || map[i][j + 1] == ' ' || map[i - 1][j] == ' ')
 	{
-		if (invalid_space(map, i))
+		if (!ft_strchr(map[i], '1') || !ft_strrchr(map[i], '1'))
+			return (1);
+		if (!ft_strchr(map[i - 1], '1') || !ft_strrchr(map[i - 1], '1'))
+			return (1);
+		if (!between_walls(map[i - 1], j))
 			return (1);
 	}
 	if (i > 0 && ((ft_strlen(map[i - 1]) - 1 < (unsigned long)j)))
