@@ -6,11 +6,12 @@
 #    By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 23:58:48 by labderra          #+#    #+#              #
-#    Updated: 2024/11/18 18:58:30 by jose-rig         ###   ########.fr        #
+#    Updated: 2024/11/19 13:59:10 by jose-rig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
+BONUS = cub3D_bonus
 LIBFT = libft/libft.a
 MLX42 = ./MLX42/build/libmlx42.a 
 MLX_FLAGS = -Iinclude -ldl -lglfw -pthread -lm
@@ -28,6 +29,7 @@ SRC_BONUS = main_bonus.c \
 initialize_bonus.c \
 raycasting_bonus.c \
 movement_bonus.c \
+minimap.c \
 _parse.c _check_map.c _create_map_bonus.c\
 _get_map_info_bonus.c _get_map_info2_bonus.c \
 _check_map_ut.c _check_map_ut2_bonus.c \
@@ -65,7 +67,9 @@ fclean : clean
 
 re : fclean all
 
-bonus : $(OBJ_BONUS) $(LIBFT) $(MLX42)
-	$(CC) $(OBJ_BONUS) $(LIBFT) $(MLX42) $(MLX_FLAGS) -o $(NAME)
+bonus : $(BONUS)
 
-.PHONY : all clean fclean re
+$(BONUS) : $(OBJ_BONUS) $(LIBFT) $(MLX42)
+	$(CC) $(OBJ_BONUS) $(LIBFT) $(MLX42) $(MLX_FLAGS) -o $(BONUS)
+
+.PHONY : all clean fclean re bonus

@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:48 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/18 20:01:45 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:02:22 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ mlx_texture_t	**load_door_textures(char *str)
 	char			**split;
 	int				i;
 
-	i = 0;
+	i = -1;
 	txts = malloc(sizeof(mlx_texture_t *) * 4);
 	split = ft_split(str, ' ');
 	txts[0] = mlx_load_png(split[1]);
 	txts[1] = mlx_load_png(split[2]);
 	txts[2] = mlx_load_png(split[3]);
 	txts[3] = mlx_load_png(split[4]);
-	while (i < 4)
+	while (++i < 4)
 		if (!txts[i])
 			return (free_split(split), free(txts), NULL);
 	return (free_split(split), txts);
@@ -92,7 +92,7 @@ static int load_textures(t_game *game)
 	if (game->n_texture)
 		game->ppu = game->n_texture->width;
 	return (game->n_texture && game->s_texture && game->e_texture
-		&& game->w_texture && game->d_texture);
+		&& game->w_texture /* && game->d_texture */);
 }
 
 static uint32_t load_colors(char *color)
@@ -126,5 +126,6 @@ t_game	*init_game(t_map *t_map)
 	game->img_w = IMG_WIDTH;
 	game->img_h = IMG_HEIGHT;
 	mlx_set_mouse_pos(game->mlx, IMG_WIDTH / 2 , IMG_HEIGHT / 2);
+	minimap_init(game);
 	return (game);
 }
