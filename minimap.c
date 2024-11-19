@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:24:23 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/19 14:08:46 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:55:50 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void	minimap(t_game *game)
 		{
 			if (game->map[j / 20][i / 20] == '1')
 				mlx_put_pixel(game->mini, i, j, 0xffffff66);
-			else if(game->map[j / 20][i / 20] == 'D'
+			else if (game->map[j / 20][i / 20] == 'D'
 				|| game->map[j / 20][i / 20] == 'O')
 				mlx_put_pixel(game->mini, i, j, 0x00ff0066);
 			else if ((int)game->pos[0] == i / 20 && (int)game->pos[1] == j / 20)
 				mlx_put_pixel(game->mini, i, j, 0xff000066);
-			else 
+			else
 				mlx_put_pixel(game->mini, i, j, 0x00000000);
 			i++;
 		}

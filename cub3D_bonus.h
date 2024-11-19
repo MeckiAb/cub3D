@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 22:59:10 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/19 17:06:32 by labderra         ###   ########.fr       */
+/*   Updated: 2024/11/19 19:19:58 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,62 +78,63 @@ typedef struct s_game
 	struct c_map	*t_map;
 }	t_game;
 
-t_game	*init_game(t_map *map);
-void	calculate_directions(t_game *game, double d_alpha);
-void	check_movement(t_game *game, double move);
-void	check_strife(t_game *game, double move);
-void	generate_frame(t_game *game);
-void	free_all(t_game *game);
-void	minimap_init(t_game *game);
-void	minimap(t_game *game);
-void	check_door(t_game *game, double distance);
+t_game		*init_game(t_map *map);
+void		calculate_directions(t_game *game, double d_alpha);
+void		check_movement(t_game *game, double move);
+void		check_strife(t_game *game, double move);
+void		generate_frame(t_game *game);
+void		minimap_init(t_game *game);
+void		minimap(t_game *game);
+void		check_door(t_game *game, double distance);
+uint32_t	endian_switch(uint32_t color);
+void		select_texture(t_game *game, int x, int y);
+void		free_all(t_game *game);
 //get map info 2
-char	*color_extraction(char **new);
-char	*extract_color_info(char *str, int count, int i, int j);
-char	*clean_map_info(char *map_line, int type);
-int		check_map_info(t_map *map);
+char		*color_extraction(char **new);
+char		*extract_color_info(char *str, int count, int i, int j);
+char		*clean_map_info(char *map_line, int type);
+int			check_map_info(t_map *map);
 //get_map_info_bonus
-char	*manage_info(char *map_line, t_map *map, int type);
-int		insert_info_two(char *map_line, t_map *map, char *initials);
-int		insert_info(char *map_line, t_map *map, char *initials);
-int		element_initials(char *initials);
-int		get_map_info(t_map *map);
+char		*manage_info(char *map_line, t_map *map, int type);
+int			insert_info_two(char *map_line, t_map *map, char *initials);
+int			insert_info(char *map_line, t_map *map, char *initials);
+int			element_initials(char *initials);
+int			get_map_info(t_map *map);
 //create_map
-char	*remove_spaces_end(char **full_map, int i);
-int		ft_space_purge(char *str);
-void	create_map(t_map *map);
+char		*remove_spaces_end(char **full_map, int i);
+int			ft_space_purge(char *str);
+void		create_map(t_map *map);
 //utilites
-char	*ft_joinfree(char *buffer, char *aux);
-char	*insert_spaces(char *line, int w);
-void	space_fill(char **mp, size_t w);
-int		are_all_digits(const char *str);
-int		ft_split_len(char **split);
+char		*ft_joinfree(char *buffer, char *aux);
+char		*insert_spaces(char *line, int w);
+void		space_fill(char **mp, size_t w);
+int			are_all_digits(const char *str);
+int			ft_split_len(char **split);
 //checkmap ut 2
-int		is_player_char(char c);
-int		valid_map_char(char c);
-int		start_of_map(char *str);
-int		is_there_double_nl(char *str);
-void	set_size(t_map *map);
+int			is_player_char(char c);
+int			valid_map_char(char c);
+int			start_of_map(char *str);
+int			is_there_double_nl(char *str);
+void		set_size(t_map *map);
 //checkmap ut
-int		map_borders_valid(char **map);
-int		between_walls(char *str, int j);
-int		zero_is_incorrect(char **map, int i, int j);
-int		map_is_valid(char **map);
-int		count_chars(char **map, char to_search);
+int			map_borders_valid(char **map);
+int			between_walls(char *str, int j);
+int			zero_is_incorrect(char **map, int i, int j);
+int			map_is_valid(char **map);
+int			count_chars(char **map, char to_search);
 //checkmap
-int		check_invalids(t_map *t_map, char **map);
-int		validate_map(t_map *map);
-int		validate_color(char *color);
-int		read_map(t_map *map, char *file);
-int		check_map(char *file, t_map *map);
+int			check_invalids(t_map *t_map, char **map);
+int			validate_map(t_map *map);
+int			validate_color(char *color);
+int			read_map(t_map *map, char *file);
+int			check_map(char *file, t_map *map);
 //parse 
-void	print_map_bonus(t_map *map);//borrar
-int		check_extension(char *str);
-int		main_parse(int argc, char **argv, t_map *map);
+int			check_extension(char *str);
+int			main_parse(int argc, char **argv, t_map *map);
 //inits and frees
-void	init_map(t_map *map);
-void	free_map(t_map *map);
-void	free_split(char **split);
-void	free_split_calloc(char **split, int size);
+void		init_map(t_map *map);
+void		free_map(t_map *map);
+void		free_split(char **split);
+void		free_split_calloc(char **split, int size);
 
 #endif

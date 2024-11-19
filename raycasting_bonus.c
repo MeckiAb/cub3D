@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:15:50 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/19 18:01:47 by labderra         ###   ########.fr       */
+/*   Updated: 2024/11/19 19:18:55 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	next_point(t_game *game, double photon[2], double m[2], double ray[2])
 {
 	double	option_1[2];
 	double	option_2[2];
-	
+
 	option_1[0] = ceil(photon[0]) - (ray[0] < 0)
 		+ (ray[0] > 0) * (ceil(photon[0]) == photon[0]);
 	option_1[1] = photon[1] + m[0] * (option_1[0] - photon[0]);
@@ -49,13 +49,7 @@ int	next_point(t_game *game, double photon[2], double m[2], double ray[2])
 	return (collision(game, photon, ray));
 }
 
-uint32_t	endian_switch(uint32_t color)
-{
-	return ((color & 0x000000ff) << 24 | (color & 0x0000ff00) << 8
-		| (color & 0x00ff0000) >> 8 | (color & 0xff000000) >> 24); 
-}
-
-void	generate_column(t_game *game, double scale, int column_id, double x_coord)
+void	gen_column(t_game *game, double scale, int column_id, double x_coord)
 {
 	int			i;
 	int			start;
@@ -69,9 +63,9 @@ void	generate_column(t_game *game, double scale, int column_id, double x_coord)
 		mlx_put_pixel(game->img, column_id, i++, game->ceiling);
 	while (i < end && i < game->img_h)
 	{
-		ft_memcpy(&color, game->current_texture->pixels + 
-			(4 * (int)(TEXTURE_S * x_coord)
-			+ (4 * TEXTURE_S * (int)((i - start) / (2 * scale)))), 4);
+		ft_memcpy(&color, game->current_texture->pixels
+			+ (4 * (int)(TEXTURE_S * x_coord)
+				+ (4 * TEXTURE_S * (int)((i - start) / (2 * scale)))), 4);
 		mlx_put_pixel(game->img, column_id, i, endian_switch(color));
 		i++;
 	}
@@ -79,44 +73,33 @@ void	generate_column(t_game *game, double scale, int column_id, double x_coord)
 		mlx_put_pixel(game->img, column_id, i++, game->floor);
 }
 
-void	select_texture(t_game *game, int x, int y)
+double	generate_x_coord(t_game *g, double photon[2], double ray[2], double xc)
 {
-	struct timeval	tv;
-	
-	gettimeofday(&tv, 0);
-	if (game->map[y][x] == 'D')
-		game->current_texture = game->d_texture[(tv.tv_usec / 250000) % 4];
-}
-
-double	generate_x_coord(t_game *game, double photon[2], double ray[2])
-{
-	double	x_coord;
-
 	if (photon[0] == ceil(photon[0]) && ray[0] > 0.0)
 	{
-		game->current_texture = game->w_texture;
-		select_texture(game, (int)photon[0], (int)photon[1]);
-		x_coord = photon[1] - floor(photon[1]);
+		g->current_texture = g->w_texture;
+		select_texture(g, (int)photon[0], (int)photon[1]);
+		xc = photon[1] - floor(photon[1]);
 	}
 	else if (photon[0] == ceil(photon[0]) && ray[0] < 0.0)
 	{
-		game->current_texture = game->e_texture;
-		select_texture(game, (int)photon[0] - 1, (int)photon[1]);
-		x_coord = photon[1] - ceil(photon[1]);
+		g->current_texture = g->e_texture;
+		select_texture(g, (int)photon[0] - 1, (int)photon[1]);
+		xc = photon[1] - ceil(photon[1]);
 	}
 	else if (ray[1] > 0.0)
 	{
-		game->current_texture = game->s_texture;
-		select_texture(game, (int)photon[0], (int)photon[1]);
-		x_coord = photon[0] - floor(photon[0]);
+		g->current_texture = g->s_texture;
+		select_texture(g, (int)photon[0], (int)photon[1]);
+		xc = photon[0] - floor(photon[0]);
 	}
 	else
 	{
-		game->current_texture = game->n_texture;
-		select_texture(game, (int)photon[0], (int)photon[1] - 1);
-		x_coord = photon[0] - ceil(photon[0]);
+		g->current_texture = g->n_texture;
+		select_texture(g, (int)photon[0], (int)photon[1] - 1);
+		xc = photon[0] - ceil(photon[0]);
 	}
-	return (x_coord);	
+	return (xc);
 }
 
 void	generate_frame(t_game *game)
@@ -126,7 +109,7 @@ void	generate_frame(t_game *game)
 	double	photon[2];
 	double	scale;
 	double	m[2];
-	
+
 	i = 0;
 	while (i < game->img_w)
 	{
@@ -139,9 +122,8 @@ void	generate_frame(t_game *game)
 		while (!next_point(game, photon, m, ray))
 			continue ;
 		scale = 1 / (cos(STEP * (512 - i))
-			* (hypot(photon[0] - game->pos[0], photon[1] - game->pos[1])));
-		generate_column(game, scale, i, generate_x_coord(game, photon, ray));
+				* (hypot(photon[0] - game->pos[0], photon[1] - game->pos[1])));
+		gen_column(game, scale, i, generate_x_coord(game, photon, ray, 0));
 		++i;
 	}
 }
-

@@ -6,11 +6,17 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:47:45 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/18 17:49:50 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/19 19:23:17 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+uint32_t	endian_switch(uint32_t color)
+{
+	return ((color & 0x000000ff) << 24 | (color & 0x0000ff00) << 8
+		| (color & 0x00ff0000) >> 8 | (color & 0xff000000) >> 24);
+}
 
 void	handle(void *param)
 {
@@ -43,7 +49,6 @@ int	main(int argc, char **argv)
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 	mlx_loop_hook(game->mlx, &handle, game);
 	mlx_loop(game->mlx);
-	print_map(&map);
 	free_all(game);
 	return (0);
 }

@@ -5,57 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 18:09:15 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 19:35:31 by jose-rig         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "cub3D_bonus.h"
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   _get_map_info.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:55:53 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 15:35:04 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/19 19:10:50 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
-
-void	print_map_bonus(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	printf("FULL MAP:\n");
-	while (map->full_map[i])
-		printf("|%s|\n", map->full_map[i++]);
-	printf("NO:%s\n", map->n_text);
-	printf("SO:%s\n", map->s_text);
-	printf("EA:%s\n", map->e_text);
-	printf("WE:%s\n", map->w_text);
-	printf("FC:%s\n", map->f_color);
-	printf("CC:%s\n", map->c_color);
-	printf("MAP:\n");
-	i = 0;
-	while (map->map[i])
-		printf("|%s|\n", map->map[i++]);
-	printf("HEIGHT:%i\n", map->map_h);
-	printf("WIDTH:%i\n", map->map_w);
-	printf("PX:%f\n", map->p_x);
-	printf("PY:%f\n", map->p_y);
-	printf("DOOR:%s\n", map->d_text);
-}
 
 char	*manage_info(char *map_line, t_map *map, int type)
 {
 	char	*element;
 
-	printf("MNG INFO: %s\n", map_line);
 	if (type == 0)
 		element = map->d_text;
 	if (type == 1)
