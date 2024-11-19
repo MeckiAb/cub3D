@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:15:50 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/19 13:34:53 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:01:47 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	collision(t_game *game, double ph[2], double ray[2])
 		|| ph[1] < 1.0 || ph[1] > game->map_h)
 		return (1);
 	if (ph[0] == ceil(ph[0]))
-		return (game->map[(int)ph[0] - (ray[0] < 0)][(int)ph[1]] == '1'
-			|| game->map[(int)ph[0] - (ray[0] < 0)][(int)ph[1]] == 'D');
+		return (game->map[(int)ph[1]][(int)ph[0] - (ray[0] < 0)] == '1'
+			|| game->map[(int)ph[1]][(int)ph[0] - (ray[0] < 0)] == 'D');
 	else
-		return (game->map[(int)ph[0]][(int)ph[1] - (ray[1] < 0)] == '1'
-			|| game->map[(int)ph[0]][(int)ph[1] - (ray[1] < 0)] == 'D');
+		return (game->map[(int)ph[1] - (ray[1] < 0)][(int)ph[0]] == '1'
+			|| game->map[(int)ph[1] - (ray[1] < 0)][(int)ph[0]] == 'D');
 }
 
 int	next_point(t_game *game, double photon[2], double m[2], double ray[2])
@@ -84,7 +84,7 @@ void	select_texture(t_game *game, int x, int y)
 	struct timeval	tv;
 	
 	gettimeofday(&tv, 0);
-	if (game->map[x][y] == 'D')
+	if (game->map[y][x] == 'D')
 		game->current_texture = game->d_texture[(tv.tv_usec / 250000) % 4];
 }
 
@@ -130,8 +130,8 @@ void	generate_frame(t_game *game)
 	i = 0;
 	while (i < game->img_w)
 	{
-		ray[0] = game->dir[0] - game->dir[1] * (512 - i) * STEP;
-		ray[1] = game->dir[1] + game->dir[0] * (512 - i) * STEP;
+		ray[0] = game->dir[0] + game->dir[1] * (512 - i) * STEP;
+		ray[1] = game->dir[1] - game->dir[0] * (512 - i) * STEP;
 		photon[0] = game->pos[0];
 		photon[1] = game->pos[1];
 		m[0] = ray[1] / ray[0];

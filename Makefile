@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+         #
+#    By: labderra <labderra@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/30 23:58:48 by labderra          #+#    #+#              #
-#    Updated: 2024/11/19 13:59:10 by jose-rig         ###   ########.fr        #
+#    Updated: 2024/11/19 17:54:45 by labderra         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ clean :
 
 fclean : clean
 	rm -f $(NAME)
+	rm -f $(BONUS)
 	make -C "libft" fclean
 
 re : fclean all

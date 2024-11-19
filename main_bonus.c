@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:47:45 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/19 14:05:00 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:25:35 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ void	handle(void *param)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-		check_strife(game, 0.1);
-	else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 		check_strife(game, -0.1);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_D))
+		check_strife(game, 0.1);
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 		check_movement(game, 0.1);
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 		check_movement(game, -0.1);
 	else if (mlx_is_key_down(game->mlx, MLX_KEY_F))
 		check_door(game, 0.8);
-	calculate_directions(game, (double)((delta_x - game->cursor_x) * PI / 360));
+	calculate_directions(game, (double)((-delta_x + game->cursor_x) * PI / 360));
 	generate_frame(game);
 	minimap(game);
 }

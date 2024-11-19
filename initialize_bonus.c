@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:48 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/19 14:02:22 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:06:21 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ t_game	*init_game(t_map *t_map)
 	game->floor = load_colors(game->t_map->f_color);
 	game->img_w = IMG_WIDTH;
 	game->img_h = IMG_HEIGHT;
-	mlx_set_mouse_pos(game->mlx, IMG_WIDTH / 2 , IMG_HEIGHT / 2);
+	mlx_get_mouse_pos(game->mlx, &(game->cursor_x), &(game->cursor_y));
 	minimap_init(game);
 	return (game);
 }

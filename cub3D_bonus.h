@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 22:59:10 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/19 13:33:26 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:06:32 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 // STEP = tg(FOV) / IMG_WIDTH
 //# define STEP			0.001691456			// 60 deg
 //# define STEP			0.001520906			// 1 rad
-# define STEP			0.000976562			// 45 deg
+# define STEP			0.000976562
 
 typedef struct c_map
 {

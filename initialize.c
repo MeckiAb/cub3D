@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:48:48 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/18 20:01:28 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/19 17:06:21 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static int	load_map(t_game *game)
 	game->map_h = game->t_map->map_h;
 	game->pos[0] = game->t_map->p_x + 0.5;
 	game->pos[1] = game->t_map->p_y + 0.5;
-	/* game->pos[0] = 3.5;
-	game->pos[1] = 4.5; */
 	if (game->t_map->facing == 'N')
 		game->alpha = PI * 0.5;
 	if (game->t_map->facing == 'E')
