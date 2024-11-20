@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _check_map_ut.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 14:39:53 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 18:03:39 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/20 10:53:03 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,8 @@ int	map_is_valid(char **map)
 {
 	int	i;
 	int	j;
-	int	max_i;
 
 	i = -1;
-	max_i = ft_split_len(map);
 	while (map[++i])
 	{
 		j = -1;
