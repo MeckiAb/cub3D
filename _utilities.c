@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 19:06:03 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 15:45:57 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:46:55 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	space_fill(char **mp, size_t w)
 	int	i;
 
 	i = -1;
-	while (mp[++i])
+	while (mp && mp[++i])
 	{
 		if (ft_strlen(mp[i]) != w)
 			mp[i] = insert_spaces(mp[i], w);

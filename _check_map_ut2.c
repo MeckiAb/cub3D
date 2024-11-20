@@ -6,7 +6,7 @@
 /*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 15:41:24 by jose-rig          #+#    #+#             */
-/*   Updated: 2024/11/18 17:59:53 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/20 11:55:42 by jose-rig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,16 @@ void	set_size(t_map *map)
 	while (map->map[++i])
 	{
 		j = 0;
-		while (map->map[i][j] && map->map[i][j] != ' '
-				&& map->map[i][j] != '\t' && map->map[i][j] != '\n')
+		while (map->map[i][j] && map->map[i][j] != ' ')
 			j++;
-		if (map->map[i][j] == ' ' && j > max_w)
-			max_w = j;
+		if (map->map[i][j] == ' ')
+		{
+			while (map->map[i][j] == ' ')
+				j++;
+			if (map->map[i][j])
+				while (map->map[i][j])
+					max_w = ++j;
+		}
 		else if (ft_strlen(map->map[i]) > (unsigned long)max_w
 			&& (map->map[i][j] != ' ' || j == 0))
 			max_w = ft_strlen(map->map[i]);
