@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 11:47:45 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/19 19:23:17 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/11/30 10:05:31 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	main(int argc, char **argv)
 	t_game	*game;
 	t_map	map;
 
+	if (argc != 2)
+		return (write(2, "Missing map file\n", 18), 1);
 	if (main_parse(argc, argv, &map))
 		return (free_map(&map), 1);
 	game = init_game(&map);
