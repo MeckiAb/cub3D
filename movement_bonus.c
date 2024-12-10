@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 10:56:53 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/19 18:56:37 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/12/05 11:18:05 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,23 @@ void	calculate_directions(t_game *game, double d_alpha)
 void	check_movement(t_game *game, double move)
 {
 	double	new_pos[2];
+	double	left[2];
+	double	right[2];
 
 	new_pos[0] = game->pos[0] + move * game->dir[0];
 	new_pos[1] = game->pos[1] + move * game->dir[1];
+	left[0] = new_pos[0] - move * game->dir[1];
+	left[1] = new_pos[1] + move * game->dir[0];
+	right[0] = new_pos[0] + move * game->dir[1];
+	right[1] = new_pos[1] - move * game->dir[0];
 	if (new_pos[0] > 0.0 && new_pos[0] < game->map_w
 		&& new_pos[1] > 0.0 && new_pos[1] < game->map_h
 		&& game->map[(int)new_pos[1]][(int)new_pos[0]] != '1'
-		&& game->map[(int)new_pos[1]][(int)new_pos[0]] != 'D')
+		&& game->map[(int)new_pos[1]][(int)new_pos[0]] != 'D'
+		&& game->map[(int)left[1]][(int)left[0]] != '1'
+		&& game->map[(int)left[1]][(int)left[0]] != 'D'
+		&& game->map[(int)right[1]][(int)right[0]] != '1'
+		&& game->map[(int)right[1]][(int)right[0]] != 'D')
 	{
 		game->pos[0] = new_pos[0];
 		game->pos[1] = new_pos[1];
@@ -42,13 +52,23 @@ void	check_movement(t_game *game, double move)
 void	check_strife(t_game *game, double move)
 {
 	double	new_pos[2];
-
+	double	front[2];
+	double	back[2];
+	
 	new_pos[0] = game->pos[0] - move * game->dir[1];
 	new_pos[1] = game->pos[1] + move * game->dir[0];
+	front[0] = new_pos[0] + move * game->dir[0];
+	front[1] = new_pos[1] + move * game->dir[1];
+	back[0] = new_pos[0] - move * game->dir[0];
+	back[1] = new_pos[1] - move * game->dir[1];
 	if (new_pos[0] > 0.0 && new_pos[0] < game->map_w
 		&& new_pos[1] > 0.0 && new_pos[1] < game->map_h
 		&& game->map[(int)new_pos[1]][(int)new_pos[0]] != '1'
-		&& game->map[(int)new_pos[1]][(int)new_pos[0]] != 'D')
+		&& game->map[(int)new_pos[1]][(int)new_pos[0]] != 'D'
+		&& game->map[(int)front[1]][(int)front[0]] != '1'
+		&& game->map[(int)front[1]][(int)front[0]] != 'D'
+		&& game->map[(int)back[1]][(int)back[0]] != '1'
+		&& game->map[(int)back[1]][(int)back[0]] != 'D')
 	{
 		game->pos[0] = new_pos[0];
 		game->pos[1] = new_pos[1];
