@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jose-rig <jose-rig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: labderra <labderra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 17:15:50 by labderra          #+#    #+#             */
-/*   Updated: 2024/11/19 19:18:55 by jose-rig         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:08:56 by labderra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,13 @@ double	generate_x_coord(t_game *g, double photon[2], double ray[2], double xc)
 	{
 		g->current_texture = g->e_texture;
 		select_texture(g, (int)photon[0] - 1, (int)photon[1]);
-		xc = photon[1] - ceil(photon[1]);
+		xc = -photon[1] + ceil(photon[1]);
 	}
 	else if (ray[1] > 0.0)
 	{
 		g->current_texture = g->s_texture;
 		select_texture(g, (int)photon[0], (int)photon[1]);
-		xc = photon[0] - floor(photon[0]);
+		xc = -photon[0] + floor(photon[0]);
 	}
 	else
 	{
